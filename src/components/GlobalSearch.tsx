@@ -3,7 +3,16 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback, useDeferredValue } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { Search, FileCheck2, Sparkles, X, ArrowRight, Wrench, GraduationCap } from 'lucide-react';
+import {
+  Search,
+  FileCheck2,
+  Sparkles,
+  X,
+  ArrowRight,
+  Wrench,
+  GraduationCap,
+  Command,
+} from 'lucide-react';
 import { PORTAL_PRESETS, TOOL_ROUTES } from '@/lib/constants';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -21,30 +30,38 @@ interface SearchItem {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Fuzzy scoring: title matches rank higher than subtitle matches    */
+/*  Fuzzy scoring: title prefix > title substring > subtitle          */
 /* ------------------------------------------------------------------ */
 
 function fuzzyScore(item: SearchItem, query: string): number {
-  const q = query.toLowerCase();
+  const q = query.toLowerCase().trim();
+  if (!q) return 0;
+
   const titleLower = item.title.toLowerCase();
   const subtitleLower = item.subtitle.toLowerCase();
+  const badgeLower = item.badge?.toLowerCase() || '';
 
   let score = 0;
 
-  // Exact starts-with on title is best
-  if (titleLower.startsWith(q)) score += 100;
-  // Title includes
-  else if (titleLower.includes(q)) score += 60;
-  // Subtitle includes (lower weight)
-  if (subtitleLower.includes(q)) score += 20;
-  // Badge includes
-  if (item.badge?.toLowerCase().includes(q)) score += 10;
+  if (titleLower.startsWith(q)) {
+    score += 100;
+  } else if (titleLower.includes(q)) {
+    score += 60;
+  }
+
+  if (subtitleLower.includes(q)) {
+    score += 25;
+  }
+
+  if (badgeLower.includes(q)) {
+    score += 15;
+  }
 
   return score;
 }
 
 /* ------------------------------------------------------------------ */
-/*  SearchTrigger – the compact pill rendered inside the Header       */
+/*  SearchTrigger (standalone export for backward compatibility)      */
 /* ------------------------------------------------------------------ */
 
 export function SearchTrigger({ onClick }: { onClick: () => void }) {
@@ -54,13 +71,16 @@ export function SearchTrigger({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-900/60 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-white dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer group shadow-xs"
+      className="w-full flex items-center justify-between gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-900/60 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-white dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer shadow-xs group"
+      aria-label="Open search command palette"
     >
-      <Search className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors" />
-      <span className="text-xs text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors hidden sm:inline">
-        {t('search_placeholder_short', 'Search tools...')}
-      </span>
-      <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-slate-400 dark:text-slate-500 bg-slate-200/60 dark:bg-slate-800 rounded border border-slate-300/60 dark:border-slate-700 ml-1">
+      <div className="flex items-center gap-2 overflow-hidden">
+        <Search className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 group-hover:text-sky-500 transition-colors shrink-0" />
+        <span className="text-xs text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors truncate">
+          {t('search_placeholder_short', 'Search tools & exam presets...')}
+        </span>
+      </div>
+      <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-slate-400 dark:text-slate-500 bg-slate-200/60 dark:bg-slate-800 rounded border border-slate-300/60 dark:border-slate-700 shrink-0">
         <span>Ctrl</span>
         <span>K</span>
       </kbd>
@@ -69,7 +89,7 @@ export function SearchTrigger({ onClick }: { onClick: () => void }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  GlobalSearch – the full command-palette modal                     */
+/*  GlobalSearch – Unified Command Palette with trigger + modal       */
 /* ------------------------------------------------------------------ */
 
 export function GlobalSearch() {
@@ -83,12 +103,11 @@ export function GlobalSearch() {
   const listRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
-  // Ensure portal only renders client-side
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  /* ---------- Build the searchable items list (memoized) ---------- */
+  /* ---------- Build searchable catalog (memoized) ---------- */
   const allItems = useMemo<SearchItem[]>(
     () => [
       ...TOOL_ROUTES.map((r) => ({
@@ -111,9 +130,11 @@ export function GlobalSearch() {
     [],
   );
 
-  /* ---------- Filtered + sorted results (uses deferredQuery) ------ */
+  /* ---------- Filter + Sort Results ---------- */
   const filtered = useMemo(() => {
-    if (deferredQuery.trim() === '') return allItems.slice(0, 10);
+    if (!deferredQuery.trim()) {
+      return allItems.slice(0, 10);
+    }
 
     return allItems
       .map((item) => ({ item, score: fuzzyScore(item, deferredQuery) }))
@@ -123,22 +144,18 @@ export function GlobalSearch() {
       .map(({ item }) => item);
   }, [allItems, deferredQuery]);
 
-  /* ---------- Group results by category ---------- */
   const toolResults = useMemo(() => filtered.filter((i) => i.category === 'tool'), [filtered]);
   const presetResults = useMemo(() => filtered.filter((i) => i.category === 'preset'), [filtered]);
-
-  /* -------- Flat list for keyboard nav across groups -------------- */
   const flatResults = useMemo(
     () => [...toolResults, ...presetResults],
     [toolResults, presetResults],
   );
 
-  /* ---------- Open / close helpers ---------- */
+  /* ---------- Handlers ---------- */
   const openPalette = useCallback(() => {
     setIsOpen(true);
     setQuery('');
     setSelectedIndex(0);
-    // Focus fires via the effect below
   }, []);
 
   const closePalette = useCallback(() => {
@@ -147,7 +164,6 @@ export function GlobalSearch() {
     setSelectedIndex(0);
   }, []);
 
-  /* ---------- Selection handler ---------- */
   const handleSelect = useCallback(
     (item: SearchItem) => {
       closePalette();
@@ -156,307 +172,274 @@ export function GlobalSearch() {
     [closePalette, router],
   );
 
-  /* ---------- Global Ctrl+K / ⌘K listener ---------- */
+  /* ---------- Global Keyboard Shortcuts ---------- */
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        setIsOpen((prev) => {
-          if (prev) {
-            // toggle off
-            closePalette();
-            return false;
-          }
-          openPalette();
-          return true;
-        });
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [openPalette, closePalette]);
-
-  /* ---------- Auto-focus input when modal opens ---------- */
-  useEffect(() => {
-    if (isOpen) {
-      // Small delay so the DOM is painted
-      const id = setTimeout(() => searchInputRef.current?.focus(), 30);
-      return () => clearTimeout(id);
-    }
-  }, [isOpen]);
-
-  /* ---------- Scroll active item into view ---------- */
-  useEffect(() => {
-    if (!listRef.current) return;
-    const activeEl = listRef.current.querySelector('[data-active="true"]');
-    if (activeEl) {
-      activeEl.scrollIntoView({ block: 'nearest' });
-    }
-  }, [selectedIndex]);
-
-  /* ---------- Reset selectedIndex when results change ---------- */
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [deferredQuery]);
-
-  /* ---------- Keyboard nav inside input ---------- */
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      const len = flatResults.length;
-      if (len === 0) return;
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setSelectedIndex((prev) => (prev + 1) % len);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + len) % len);
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        if (flatResults[selectedIndex]) handleSelect(flatResults[selectedIndex]);
-      } else if (e.key === 'Escape') {
+        setIsOpen((prev) => !prev);
+      } else if (e.key === 'Escape' && isOpen) {
         e.preventDefault();
         closePalette();
       }
-    },
-    [flatResults, selectedIndex, handleSelect, closePalette],
-  );
+    };
 
-  /* ---------- Backdrop click ---------- */
-  const handleBackdropClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (e.target === e.currentTarget) closePalette();
-    },
-    [closePalette],
-  );
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [isOpen, closePalette]);
 
-  /* ---------- Render a single result row ---------- */
-  const renderItem = (item: SearchItem, flatIdx: number) => {
-    const isActive = selectedIndex === flatIdx;
-    return (
-      <button
-        key={item.id}
-        id={`search-option-${flatIdx}`}
-        role="option"
-        aria-selected={isActive}
-        data-active={isActive}
-        type="button"
-        onClick={() => handleSelect(item)}
-        onMouseEnter={() => setSelectedIndex(flatIdx)}
-        className={`w-full text-left px-3 py-2.5 rounded-xl flex items-center justify-between gap-3 text-sm transition-all duration-100 outline-none ${
-          isActive
-            ? 'bg-sky-50 dark:bg-sky-950/60 border-l-[3px] border-l-sky-500 pl-[9px]'
-            : 'border-l-[3px] border-l-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
-        }`}
-      >
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div
-            className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-              isActive
-                ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-            }`}
-          >
-            {item.category === 'tool' ? (
-              <FileCheck2 className="w-4 h-4" />
-            ) : (
-              <Sparkles className="w-4 h-4" />
-            )}
-          </div>
-          <div className="overflow-hidden">
-            <p
-              className={`font-semibold truncate text-[13px] ${
-                isActive ? 'text-sky-900 dark:text-sky-100' : 'text-slate-800 dark:text-slate-200'
-              }`}
-            >
-              {item.title}
-            </p>
-            <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">
-              {item.subtitle}
-            </p>
-          </div>
-        </div>
+  /* ---------- Auto-focus Input ---------- */
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => searchInputRef.current?.focus(), 40);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
-        <div className="flex items-center gap-2 shrink-0">
-          {item.badge && (
-            <span
-              className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                isActive
-                  ? 'bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-              }`}
-            >
-              {item.badge}
-            </span>
-          )}
-          <ArrowRight
-            className={`w-3.5 h-3.5 transition-all ${
-              isActive
-                ? 'text-sky-500 translate-x-0 opacity-100'
-                : 'text-slate-300 -translate-x-1 opacity-0'
-            }`}
-          />
-        </div>
-      </button>
-    );
+  /* ---------- Keyboard Navigation in Modal ---------- */
+  const handleKeyDownInInput = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % Math.max(1, flatResults.length));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + flatResults.length) % Math.max(1, flatResults.length));
+    } else if (e.key === 'Enter' && flatResults[selectedIndex]) {
+      e.preventDefault();
+      handleSelect(flatResults[selectedIndex]);
+    }
   };
 
-  /* ---------- Section header ---------- */
-  const renderSectionHeader = (icon: React.ReactNode, label: string) => (
-    <div className="flex items-center gap-2 px-3 pt-3 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 select-none">
-      {icon}
-      {label}
-    </div>
-  );
-
-  /* ---------- Portal content ---------- */
-  if (!mounted || !isOpen) {
-    return null;
-  }
-
-  // Build the flat-index offset for presets (they come after tools)
-  const presetIndexOffset = toolResults.length;
-
-  const modalContent = (
-    /* Frosted glass backdrop */
-    <div
-      className="fixed inset-0 z-[9999] flex items-start justify-center pt-[12vh] sm:pt-[18vh] px-4"
-      style={{
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-      }}
-      onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Search tools and presets"
-    >
-      {/* Command palette card */}
+  /* ---------- Modal Dialog Content ---------- */
+  const modalContent =
+    isOpen && mounted ? (
       <div
-        className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 border border-slate-200/80 dark:border-slate-800 overflow-hidden"
-        style={{
-          animation: 'globalSearchFadeIn 150ms cubic-bezier(0.16,1,0.3,1)',
-        }}
+        className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-150"
+        onClick={closePalette}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search tools and exam presets"
       >
-        {/* Search input row */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-100 dark:border-slate-800">
-          <Search className="w-5 h-5 text-slate-400 dark:text-slate-500 shrink-0" />
-          <input
-            ref={searchInputRef}
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={t('search_placeholder', 'Search tools, presets (50KB, UPSC, SSC, PDF)...')}
-            className="flex-1 bg-transparent text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
-            aria-label="Search"
-            aria-controls="search-listbox"
-            aria-activedescendant={
-              flatResults.length > 0 ? `search-option-${selectedIndex}` : undefined
-            }
-            autoComplete="off"
-            spellCheck={false}
-          />
-          {query ? (
-            <button
-              type="button"
-              onClick={() => {
-                setQuery('');
-                searchInputRef.current?.focus();
-              }}
-              className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition"
-              aria-label="Clear search"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          ) : (
-            <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-1 text-[11px] font-mono text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-              Esc
-            </kbd>
-          )}
-        </div>
-
-        {/* Results area */}
         <div
-          ref={listRef}
-          id="search-listbox"
-          role="listbox"
-          aria-label="Search results"
-          className="max-h-[50vh] overflow-y-auto overscroll-contain p-1.5"
+          className="w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-150"
+          onClick={(e) => e.stopPropagation()}
         >
-          {flatResults.length > 0 ? (
-            <>
-              {/* Tools section */}
-              {toolResults.length > 0 && (
-                <>
-                  {renderSectionHeader(<Wrench className="w-3 h-3" />, 'Tools')}
-                  {toolResults.map((item, idx) => renderItem(item, idx))}
-                </>
+          {/* Search Input Bar */}
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-100 dark:border-slate-800">
+            <Search className="w-5 h-5 text-sky-500 shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setSelectedIndex(0);
+              }}
+              onKeyDown={handleKeyDownInInput}
+              placeholder={t(
+                'search_placeholder',
+                'Search tools, presets (50KB, UPSC, SSC, PDF)...',
               )}
+              className="flex-1 bg-transparent text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
+              aria-label="Search"
+              autoComplete="off"
+              spellCheck={false}
+            />
+            {query ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery('');
+                  searchInputRef.current?.focus();
+                }}
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg"
+                aria-label="Clear search"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            ) : (
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[11px] font-mono text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                Esc
+              </kbd>
+            )}
+          </div>
 
-              {/* Presets section */}
-              {presetResults.length > 0 && (
-                <>
-                  {renderSectionHeader(<GraduationCap className="w-3 h-3" />, 'Exam Presets')}
-                  {presetResults.map((item, idx) => renderItem(item, presetIndexOffset + idx))}
-                </>
-              )}
-            </>
-          ) : (
-            <div className="py-12 text-center">
-              <Search className="w-8 h-8 text-slate-200 dark:text-slate-700 mx-auto mb-3" />
-              <p className="text-sm text-slate-400 dark:text-slate-500">
-                No results for &ldquo;{deferredQuery}&rdquo;
-              </p>
-              <p className="text-xs text-slate-300 dark:text-slate-600 mt-1">
-                Try a different keyword
-              </p>
+          {/* Results List */}
+          <div ref={listRef} className="max-h-[55vh] overflow-y-auto p-2 space-y-1">
+            {flatResults.length > 0 ? (
+              <>
+                {/* Tools Section */}
+                {toolResults.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                      <Wrench className="w-3 h-3 text-sky-500" />
+                      <span>Tools & Utilities</span>
+                    </div>
+                    {toolResults.map((item) => {
+                      const idx = flatResults.indexOf(item);
+                      const isSelected = selectedIndex === idx;
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => handleSelect(item)}
+                          onMouseEnter={() => setSelectedIndex(idx)}
+                          className={`w-full text-left px-3.5 py-2.5 rounded-2xl flex items-center justify-between gap-3 text-xs sm:text-sm transition-all duration-150 ${
+                            isSelected
+                              ? 'bg-sky-50 dark:bg-sky-950/70 text-sky-900 dark:text-sky-100 shadow-xs'
+                              : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden">
+                            <div
+                              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                                isSelected
+                                  ? 'bg-sky-600 text-white'
+                                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                              }`}
+                            >
+                              <FileCheck2 className="w-4 h-4" />
+                            </div>
+                            <div className="overflow-hidden">
+                              <p className="font-bold truncate text-slate-900 dark:text-white">
+                                {item.title}
+                              </p>
+                              <p className="text-xs text-slate-400 dark:text-slate-500 truncate">
+                                {item.subtitle}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            {item.badge && (
+                              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                                {item.badge}
+                              </span>
+                            )}
+                            <ArrowRight
+                              className={`w-3.5 h-3.5 transition-transform ${
+                                isSelected
+                                  ? 'translate-x-0.5 text-sky-600 dark:text-sky-400'
+                                  : 'text-slate-400 opacity-40'
+                              }`}
+                            />
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Exam Presets Section */}
+                {presetResults.length > 0 && (
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                      <GraduationCap className="w-3 h-3 text-indigo-500" />
+                      <span>Exam & Portal Presets</span>
+                    </div>
+                    {presetResults.map((item) => {
+                      const idx = flatResults.indexOf(item);
+                      const isSelected = selectedIndex === idx;
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => handleSelect(item)}
+                          onMouseEnter={() => setSelectedIndex(idx)}
+                          className={`w-full text-left px-3.5 py-2.5 rounded-2xl flex items-center justify-between gap-3 text-xs sm:text-sm transition-all duration-150 ${
+                            isSelected
+                              ? 'bg-indigo-50 dark:bg-indigo-950/70 text-indigo-900 dark:text-indigo-100 shadow-xs'
+                              : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden">
+                            <div
+                              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                                isSelected
+                                  ? 'bg-indigo-600 text-white'
+                                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                              }`}
+                            >
+                              <Sparkles className="w-4 h-4" />
+                            </div>
+                            <div className="overflow-hidden">
+                              <p className="font-bold truncate text-slate-900 dark:text-white">
+                                {item.title}
+                              </p>
+                              <p className="text-xs text-slate-400 dark:text-slate-500 truncate">
+                                {item.subtitle}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            {item.badge && (
+                              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                {item.badge}
+                              </span>
+                            )}
+                            <ArrowRight
+                              className={`w-3.5 h-3.5 transition-transform ${
+                                isSelected
+                                  ? 'translate-x-0.5 text-indigo-600 dark:text-indigo-400'
+                                  : 'text-slate-400 opacity-40'
+                              }`}
+                            />
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="py-12 text-center">
+                <Search className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                  No matching tools or presets for &ldquo;{deferredQuery}&rdquo;
+                </p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                  Try searching &quot;50kb&quot;, &quot;upsc&quot;, &quot;signature&quot;, or
+                  &quot;pdf&quot;
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Modal Footer Keyboard Hints */}
+          <div className="px-5 py-3 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50 flex items-center justify-between text-xs text-slate-400 dark:text-slate-500 select-none">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1">
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  ↑
+                </kbd>
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  ↓
+                </kbd>
+                <span className="hidden sm:inline">Navigate</span>
+              </span>
+              <span className="flex items-center gap-1">
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  ↵
+                </kbd>
+                <span className="hidden sm:inline">Select</span>
+              </span>
             </div>
-          )}
-        </div>
-
-        {/* Keyboard hints footer */}
-        <div className="flex items-center justify-center gap-4 px-5 py-2.5 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 dark:text-slate-500 select-none">
-          <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
-              ↑
-            </kbd>
-            <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
-              ↓
-            </kbd>
-            <span className="ml-0.5">Navigate</span>
-          </span>
-          <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
-              ↵
-            </kbd>
-            <span className="ml-0.5">Open</span>
-          </span>
-          <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
-              Esc
-            </kbd>
-            <span className="ml-0.5">Close</span>
-          </span>
+            <span className="flex items-center gap-1">
+              <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                Esc
+              </kbd>
+              <span className="hidden sm:inline">Close</span>
+            </span>
+          </div>
         </div>
       </div>
+    ) : null;
 
-      {/* Keyframe animation injected once */}
-      <style>{`
-        @keyframes globalSearchFadeIn {
-          from {
-            opacity: 0;
-            transform: scale(0.97) translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-      `}</style>
-    </div>
+  return (
+    <>
+      <SearchTrigger onClick={openPalette} />
+      {mounted && modalContent && createPortal(modalContent, document.body)}
+    </>
   );
-
-  return createPortal(modalContent, document.body);
 }

@@ -7,7 +7,7 @@ import { ShieldCheck, Moon, Sun, Laptop, Menu, X, FileCheck2 } from 'lucide-reac
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { PrivacyModal } from '@/components/PrivacyModal';
-import { GlobalSearch, SearchTrigger } from '@/components/GlobalSearch';
+import { GlobalSearch } from '@/components/GlobalSearch';
 import { SupportedLanguage } from '@/types';
 
 export function Header() {
@@ -16,7 +16,6 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navLinks = [
     { href: '/compress-image', label: t('nav_compress', 'Compress') },
@@ -76,9 +75,9 @@ export function Header() {
             </nav>
           </div>
 
-          {/* Global Search Trigger */}
-          <div className="flex-1 flex justify-center mx-1 sm:mx-2">
-            <SearchTrigger onClick={() => setIsSearchOpen(true)} />
+          {/* Global Search Bar */}
+          <div className="flex-1 max-w-xs sm:max-w-sm md:max-w-md mx-1 sm:mx-2">
+            <GlobalSearch />
           </div>
 
           {/* Right Action Bar */}
@@ -193,9 +192,6 @@ export function Header() {
 
       {/* Privacy Guarantee Explanation Modal */}
       <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
-
-      {/* Global Search Command Palette (portal) */}
-      {isSearchOpen && <GlobalSearch />}
     </>
   );
 }
