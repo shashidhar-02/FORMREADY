@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",
+    "@tailwindcss/postcss": "^4.3.5",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^26.6.6",
@@ -28,6 +29,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "jsdom": "^31.0.1",
+    "postcss": "^8.5.33",
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vite": "^8.3.8",

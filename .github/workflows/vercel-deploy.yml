@@ -1,0 +1,56 @@
+name: Vercel Production Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Verify Build
+        run: npm run build
+
+      - name: Deploy to Vercel Production
+        if: env.VERCEL_TOKEN != ''
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: ./
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Notice on Missing Vercel Secrets
+        if: env.VERCEL_TOKEN == ''
+        run: |
+          echo "=========================================================="
+          echo "Notice: VERCEL_TOKEN secret is not set in GitHub repository settings."
+          echo "If your repository is already directly connected to Vercel via GitHub App,"
+          echo "Vercel will automatically build and deploy every commit to main."
+          echo "To enable direct CLI deployment via this GitHub Action, add:"
+          echo "- VERCEL_TOKEN"
+          echo "- VERCEL_ORG_ID"
+          echo "- VERCEL_PROJECT_ID"
+          echo "to Settings -> Secrets and variables -> Actions."
+          echo "=========================================================="
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
