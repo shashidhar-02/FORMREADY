@@ -120,11 +120,10 @@ export function SeoContentSection({
                 key={idx}
                 className="p-5 rounded-2xl border border-amber-200/70 dark:border-amber-900/40 bg-amber-50/30 dark:bg-amber-950/20 space-y-2 text-xs sm:text-sm"
               >
-                <p className="font-bold text-amber-900 dark:text-amber-200">
-                  ✗ {item.mistake}
-                </p>
+                <p className="font-bold text-amber-900 dark:text-amber-200">✗ {item.mistake}</p>
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  ✓ <strong className="text-slate-900 dark:text-slate-200">Solution:</strong> {item.solution}
+                  ✓ <strong className="text-slate-900 dark:text-slate-200">Solution:</strong>{' '}
+                  {item.solution}
                 </p>
               </div>
             ))}
@@ -147,9 +146,7 @@ export function SeoContentSection({
               >
                 <summary className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white list-none flex items-center justify-between">
                   <span>{faq.question}</span>
-                  <span className="text-sky-500 group-open:rotate-180 transition-transform">
-                    ↓
-                  </span>
+                  <span className="text-sky-500 group-open:rotate-180 transition-transform">↓</span>
                 </summary>
                 <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
                   {faq.answer}
@@ -177,12 +174,11 @@ export function SeoContentSection({
                   <h4 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition">
                     {tool.title}
                   </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    {tool.desc}
-                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{tool.desc}</p>
                 </div>
                 <span className="mt-3 text-xs font-semibold text-sky-600 dark:text-sky-400 flex items-center gap-1">
-                  Use Tool <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  Use Tool{' '}
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             ))}
@@ -199,7 +195,8 @@ export function SeoContentSection({
               Zero-Server Client Architecture
             </h4>
             <p className="text-xs text-slate-500">
-              Your confidential documents, photos, and signatures never leave your browser. FormReady runs 100% locally on your machine.
+              Your confidential documents, photos, and signatures never leave your browser.
+              FormReady runs 100% locally on your machine.
             </p>
           </div>
         </div>

@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Convert Image Format (JPG, PNG, WebP) - FormReady',
-  description: 'Convert images instantly between JPG, PNG, and WebP format directly in your browser. Zero uploads, no watermark.',
+  description:
+    'Convert images instantly between JPG, PNG, and WebP format directly in your browser. Zero uploads, no watermark.',
   alternates: { canonical: 'https://formready.vercel.app/convert-image' },
 };
 
@@ -26,18 +27,28 @@ export default function ConvertImagePage() {
         commonMistakes={[
           {
             mistake: 'Simply changing the file extension from .png to .jpg in File Explorer.',
-            solution: 'Portals verify the binary file header (magic bytes). FormReady properly encodes the image structure to valid JPEG.',
+            solution:
+              'Portals verify the binary file header (magic bytes). FormReady properly encodes the image structure to valid JPEG.',
           },
         ]}
         faqs={[
           {
             question: 'Why do forms reject PNG and WebP files?',
-            answer: 'Legacy portal backends often only have JPEG decoders installed and enforce strict MIME-type checks.',
+            answer:
+              'Legacy portal backends often only have JPEG decoders installed and enforce strict MIME-type checks.',
           },
         ]}
         relatedTools={[
-          { href: '/compress-image', title: 'Compress Image', desc: 'Target exact file size in KB' },
-          { href: '/resize-photo', title: 'Passport Photo Resizer', desc: 'Crop to standard proportions' },
+          {
+            href: '/compress-image',
+            title: 'Compress Image',
+            desc: 'Target exact file size in KB',
+          },
+          {
+            href: '/resize-photo',
+            title: 'Passport Photo Resizer',
+            desc: 'Crop to standard proportions',
+          },
         ]}
       />
     </div>

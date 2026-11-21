@@ -1,18 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Download,
-  RefreshCw,
-  FileCheck2,
-  ArrowRight,
-} from 'lucide-react';
+import { Download, RefreshCw, FileCheck2, ArrowRight } from 'lucide-react';
 import { DropZone } from './DropZone';
-import {
-  compressImageToTarget,
-  loadImageElement,
-  formatBytes,
-} from '@/lib/image-compressor';
+import { compressImageToTarget, loadImageElement, formatBytes } from '@/lib/image-compressor';
 import { CompressionResult, ImageFormat } from '@/types';
 import confetti from 'canvas-confetti';
 
@@ -64,7 +55,8 @@ export function ImageConvertTool() {
     if (!result || !file) return;
     const a = document.createElement('a');
     a.href = result.url;
-    const ext = targetFormat === 'image/png' ? 'png' : targetFormat === 'image/webp' ? 'webp' : 'jpg';
+    const ext =
+      targetFormat === 'image/png' ? 'png' : targetFormat === 'image/webp' ? 'webp' : 'jpg';
     a.download = `converted_${file.name.substring(0, file.name.lastIndexOf('.')) || 'image'}.${ext}`;
     document.body.appendChild(a);
     a.click();
@@ -139,9 +131,7 @@ export function ImageConvertTool() {
               ) : (
                 <>
                   <FileCheck2 className="w-5 h-5" />
-                  <span>
-                    Convert to {targetFormat.replace('image/', '').toUpperCase()}
-                  </span>
+                  <span>Convert to {targetFormat.replace('image/', '').toUpperCase()}</span>
                 </>
               )}
             </button>

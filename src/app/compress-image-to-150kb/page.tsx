@@ -4,7 +4,8 @@ import { SizeCompressorPage } from '@/components/SizeCompressorPage';
 
 export const metadata: Metadata = {
   title: 'Compress Image to 150 KB Online - FormReady',
-  description: 'Compress scanned documents and photos strictly under 150 KB. 100% private in browser.',
+  description:
+    'Compress scanned documents and photos strictly under 150 KB. 100% private in browser.',
   alternates: { canonical: 'https://formready.vercel.app/compress-image-to-150kb' },
 };
 

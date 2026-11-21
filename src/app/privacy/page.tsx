@@ -34,7 +34,8 @@ export default function PrivacyPage() {
           Privacy Policy & Architecture
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          We believe personal identification documents, handwritten signatures, and academic certificates should never be uploaded to third-party conversion servers.
+          We believe personal identification documents, handwritten signatures, and academic
+          certificates should never be uploaded to third-party conversion servers.
         </p>
       </div>
 
@@ -48,7 +49,8 @@ export default function PrivacyPage() {
             1. Zero File Uploads
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            FormReady has NO file-processing backend API routes. When you select or drag a file, it is decoded solely inside your browser using HTML5 Canvas, ImageBitmap, and WebAssembly.
+            FormReady has NO file-processing backend API routes. When you select or drag a file, it
+            is decoded solely inside your browser using HTML5 Canvas, ImageBitmap, and WebAssembly.
           </p>
         </div>
 
@@ -60,7 +62,9 @@ export default function PrivacyPage() {
             2. No Database for Uploaded Files
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Because files are never transmitted across the network, there is no cloud bucket (S3/GCS), database, or temporary storage folder where files could be intercepted or retained.
+            Because files are never transmitted across the network, there is no cloud bucket
+            (S3/GCS), database, or temporary storage folder where files could be intercepted or
+            retained.
           </p>
         </div>
 
@@ -72,7 +76,8 @@ export default function PrivacyPage() {
             3. No Advertising Trackers or Cookies
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            FormReady does not run Google Analytics, Meta Pixel, Hotjar, or third-party behavioral trackers. No cookies are used to track your activity across sessions.
+            FormReady does not run Google Analytics, Meta Pixel, Hotjar, or third-party behavioral
+            trackers. No cookies are used to track your activity across sessions.
           </p>
         </div>
 
@@ -84,7 +89,8 @@ export default function PrivacyPage() {
             4. No Third-Party AI APIs
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Your photos and signatures are never forwarded to OpenAI, Google Cloud Vision, or any remote AI API. Algorithms run deterministically on local device hardware.
+            Your photos and signatures are never forwarded to OpenAI, Google Cloud Vision, or any
+            remote AI API. Algorithms run deterministically on local device hardware.
           </p>
         </div>
       </div>
@@ -96,14 +102,32 @@ export default function PrivacyPage() {
           <span>How to Audit & Verify Local Processing</span>
         </h2>
         <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          You don’t have to take our word for it. You can inspect the network requests yourself in any browser:
+          You don’t have to take our word for it. You can inspect the network requests yourself in
+          any browser:
         </p>
         <ol className="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-          <li>Open your browser Developer Tools (<kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border">F12</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border">Ctrl+Shift+I</kbd>).</li>
-          <li>Navigate to the <strong>Network</strong> tab.</li>
-          <li>Drag or select a 5 MB image or PDF and click <strong>Compress</strong>.</li>
-          <li>Notice that <strong>zero outbound network requests</strong> are initiated during compression, cropping, or PDF merging.</li>
-          <li>You can also disconnect from Wi-Fi or turn on Airplane Mode: FormReady continues working seamlessly offline.</li>
+          <li>
+            Open your browser Developer Tools (
+            <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border">F12</kbd> or{' '}
+            <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border">
+              Ctrl+Shift+I
+            </kbd>
+            ).
+          </li>
+          <li>
+            Navigate to the <strong>Network</strong> tab.
+          </li>
+          <li>
+            Drag or select a 5 MB image or PDF and click <strong>Compress</strong>.
+          </li>
+          <li>
+            Notice that <strong>zero outbound network requests</strong> are initiated during
+            compression, cropping, or PDF merging.
+          </li>
+          <li>
+            You can also disconnect from Wi-Fi or turn on Airplane Mode: FormReady continues working
+            seamlessly offline.
+          </li>
         </ol>
       </section>
 
@@ -113,10 +137,18 @@ export default function PrivacyPage() {
           Browser Cache & Local Settings
         </h2>
         <p className="leading-relaxed">
-          FormReady stores non-sensitive user interface preferences (such as your preferred language: English, Hindi, or Telugu, and light/dark theme preference) in your browser’s standard <code className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">localStorage</code>. No uploaded photos or documents are ever permanently saved to browser storage unless you explicitly choose to download them.
+          FormReady stores non-sensitive user interface preferences (such as your preferred
+          language: English, Hindi, or Telugu, and light/dark theme preference) in your browser’s
+          standard{' '}
+          <code className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
+            localStorage
+          </code>
+          . No uploaded photos or documents are ever permanently saved to browser storage unless you
+          explicitly choose to download them.
         </p>
         <p className="leading-relaxed">
-          You can clear all stored preferences at any time by clicking <strong>“Clear local data”</strong> in the footer.
+          You can clear all stored preferences at any time by clicking{' '}
+          <strong>“Clear local data”</strong> in the footer.
         </p>
       </section>
     </div>

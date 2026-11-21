@@ -5,6 +5,7 @@ All notable changes to FormReady will be documented in this file.
 ## [1.0.0] - 2026-11-21
 
 ### Initial Release
+
 - Target-size image compressor with binary-search quality optimization (10 KB to 1 MB).
 - Signature fixer with automatic whitespace detection and background contrast enhancement.
 - Passport photo preparation tool with face framing guide and printable 4x6 grid.

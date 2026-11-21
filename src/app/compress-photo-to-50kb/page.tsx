@@ -4,7 +4,8 @@ import { SizeCompressorPage } from '@/components/SizeCompressorPage';
 
 export const metadata: Metadata = {
   title: 'Compress Photo to 50 KB Online - FormReady',
-  description: 'Compress candidate passport photo to 50 KB for online examination and job applications. Zero upload, verified locally.',
+  description:
+    'Compress candidate passport photo to 50 KB for online examination and job applications. Zero upload, verified locally.',
   alternates: { canonical: 'https://formready.vercel.app/compress-photo-to-50kb' },
 };
 

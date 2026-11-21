@@ -28,10 +28,7 @@ export function getLuminance(r: number, g: number, b: number): number {
 /**
  * Finds the tight bounding box around the ink strokes in an ImageData buffer.
  */
-export function findSignatureBounds(
-  imageData: ImageData,
-  threshold: number = 220
-): BoundingBox {
+export function findSignatureBounds(imageData: ImageData, threshold: number = 220): BoundingBox {
   const { width, height, data } = imageData;
   let minX = width;
   let minY = height;
@@ -77,7 +74,7 @@ export function findSignatureBounds(
  */
 export function processSignatureCanvas(
   sourceCanvas: HTMLCanvasElement,
-  options: SignatureProcessOptions = {}
+  options: SignatureProcessOptions = {},
 ): HTMLCanvasElement {
   const {
     autoTrim = true,
@@ -135,7 +132,7 @@ export function processSignatureCanvas(
     0,
     0,
     cropBox.width,
-    cropBox.height
+    cropBox.height,
   );
 
   // If contrast boost requested, clean up paper shadows and deepen ink

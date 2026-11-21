@@ -109,7 +109,9 @@ export function PresetSelector({
                 {preset.isOfficialVerified ? (
                   <span className="text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>{t('verified_badge', 'Verified')} ({preset.verifiedAt})</span>
+                    <span>
+                      {t('verified_badge', 'Verified')} ({preset.verifiedAt})
+                    </span>
                   </span>
                 ) : (
                   <span className="text-slate-400 flex items-center gap-1">

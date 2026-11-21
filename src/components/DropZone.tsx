@@ -43,7 +43,7 @@ export function DropZone({
         onFileSelect([fileList[0]]);
       }
     },
-    [multiple, onFileSelect]
+    [multiple, onFileSelect],
   );
 
   // Global paste handler (Ctrl+V)
@@ -187,7 +187,11 @@ export function DropZone({
               {title || t('drop_title', 'Drop image here or choose file')}
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-              {subtitle || t('drop_subtitle', 'Supports JPG, PNG, WebP. Analyzed & compressed strictly in your browser.')}
+              {subtitle ||
+                t(
+                  'drop_subtitle',
+                  'Supports JPG, PNG, WebP. Analyzed & compressed strictly in your browser.',
+                )}
             </p>
           </div>
 

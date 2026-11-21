@@ -39,8 +39,7 @@ export function SizeCompressorPage({
         commonMistakes={[
           {
             mistake: `File size ends up slightly above ${targetKB >= 1000 ? '1 MB' : `${targetKB} KB`}.`,
-            solution:
-              `FormReady incorporates an automatic safety margin so a ${targetKB} KB target produces ~${Math.floor(targetKB * 0.96)} KB, safely below portal filters.`,
+            solution: `FormReady incorporates an automatic safety margin so a ${targetKB} KB target produces ~${Math.floor(targetKB * 0.96)} KB, safely below portal filters.`,
           },
           {
             mistake: 'Image dimensions cause distortion on portal preview.',
@@ -60,9 +59,21 @@ export function SizeCompressorPage({
           },
         ]}
         relatedTools={[
-          { href: '/compress-image-to-20kb', title: 'Compress to 20 KB', desc: 'For signatures & thumbnails' },
-          { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'For passport photos' },
-          { href: '/compress-image-to-100kb', title: 'Compress to 100 KB', desc: 'For certificates & IDs' },
+          {
+            href: '/compress-image-to-20kb',
+            title: 'Compress to 20 KB',
+            desc: 'For signatures & thumbnails',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress to 50 KB',
+            desc: 'For passport photos',
+          },
+          {
+            href: '/compress-image-to-100kb',
+            title: 'Compress to 100 KB',
+            desc: 'For certificates & IDs',
+          },
         ]}
       />
     </div>

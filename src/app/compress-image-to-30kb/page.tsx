@@ -4,7 +4,8 @@ import { SizeCompressorPage } from '@/components/SizeCompressorPage';
 
 export const metadata: Metadata = {
   title: 'Compress Image to 30 KB Online - FormReady',
-  description: 'Compress signatures and photos strictly under 30 KB for NEET UG, JEE Main, and entrance exams.',
+  description:
+    'Compress signatures and photos strictly under 30 KB for NEET UG, JEE Main, and entrance exams.',
   alternates: { canonical: 'https://formready.vercel.app/compress-image-to-30kb' },
 };
 

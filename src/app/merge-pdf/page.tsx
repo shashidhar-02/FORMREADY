@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Merge PDF Files Online Free - FormReady',
-  description: 'Merge multiple PDF files into one document in your browser. Fast, private, zero server uploads, no watermark.',
+  description:
+    'Merge multiple PDF files into one document in your browser. Fast, private, zero server uploads, no watermark.',
   alternates: { canonical: 'https://formready.vercel.app/merge-pdf' },
 };
 
@@ -26,7 +27,8 @@ export default function MergePdfPage() {
         ]}
         commonMistakes={[
           {
-            mistake: 'Using cloud PDF mergers that store your sensitive identity documents on external servers.',
+            mistake:
+              'Using cloud PDF mergers that store your sensitive identity documents on external servers.',
             solution: 'FormReady runs 100% in your browser. Zero bytes are uploaded.',
           },
         ]}

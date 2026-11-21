@@ -11,12 +11,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  typecheck:
-    name: TypeScript Type Check
+  quality-gate:
+    name: Code Quality Gate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
@@ -27,7 +29,14 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run TypeScript Check
+      - name: Prettier Format Check
+        run: npx prettier --check .
+
+      - name: ESLint
+        run: npx eslint . --max-warnings 0
+        continue-on-error: true
+
+      - name: TypeScript Type Check
         run: npx tsc --noEmit
 
   unit-tests:
@@ -46,12 +55,50 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Execute Vitest Suite
-        run: npm test
+      - name: Execute Vitest Suite with Coverage
+        run: npm test -- --reporter=verbose
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            coverage/
+            test-results/
+          retention-days: 14
+
+  security-audit:
+    name: Security Audit & Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: NPM Audit
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Gitleaks Secret Scanning
+        uses: gitleaks/gitleaks-action@v2
+        continue-on-error: true
+        env:
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
   production-build:
-    name: Production Static Build & CSS Verification
-    needs: [typecheck, unit-tests]
+    name: Production Static Build & Verification
+    needs: [quality-gate, unit-tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -69,8 +116,47 @@ jobs:
       - name: Build Static Production Export
         run: npm run build
 
-      - name: Verify Static Output & CSS Bundle
+      - name: Verify Static Output Exists
         run: |
-          test -f out/index.html || { echo "index.html missing"; exit 1; }
-          test -d out/_next/static/chunks || { echo "static chunks missing"; exit 1; }
-          echo "Static export verified successfully!"
+          test -f out/index.html || { echo "❌ index.html missing"; exit 1; }
+          echo "✅ out/index.html verified"
+
+      - name: Verify CSS Bundle Exists
+        run: |
+          test -d out/_next/static/chunks || { echo "❌ static chunks missing"; exit 1; }
+          echo "✅ CSS bundle directory verified"
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: out/
+          retention-days: 7
+
+  lighthouse-audit:
+    name: Lighthouse Performance Audit
+    needs: [production-build]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: out/
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          uploadArtifacts: true
+          configPath: .lighthouserc.json
+        continue-on-error: true

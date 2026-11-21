@@ -36,7 +36,10 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h3 id="privacy-modal-title" className="text-xl font-bold text-slate-900 dark:text-white">
+            <h3
+              id="privacy-modal-title"
+              className="text-xl font-bold text-slate-900 dark:text-white"
+            >
               Zero-Upload Architecture
             </h3>
             <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
@@ -47,31 +50,46 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
 
         <div className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
           <p className="font-medium text-slate-900 dark:text-slate-100">
-            “Your files are processed strictly in this browser. FormReady does not upload your files to a processing server.”
+            “Your files are processed strictly in this browser. FormReady does not upload your files
+            to a processing server.”
           </p>
 
           <div className="grid grid-cols-1 gap-2.5 pt-2">
             <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
               <ServerOff className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-slate-900 dark:text-white text-xs">No Server Endpoints</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">We do not have backend API routes or file storage. Files never touch a cloud server.</p>
+                <p className="font-semibold text-slate-900 dark:text-white text-xs">
+                  No Server Endpoints
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  We do not have backend API routes or file storage. Files never touch a cloud
+                  server.
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
               <Cpu className="w-5 h-5 text-sky-500 shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-slate-900 dark:text-white text-xs">Your Device Does the Work</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Image compression, PDF merging, and signature trimming run via browser Canvas and WebAssembly.</p>
+                <p className="font-semibold text-slate-900 dark:text-white text-xs">
+                  Your Device Does the Work
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Image compression, PDF merging, and signature trimming run via browser Canvas and
+                  WebAssembly.
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
               <HardDrive className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-slate-900 dark:text-white text-xs">No Tracking or Accounts</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">No cookies, no analytics tracking, no sign-up forms, and no watermarks.</p>
+                <p className="font-semibold text-slate-900 dark:text-white text-xs">
+                  No Tracking or Accounts
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  No cookies, no analytics tracking, no sign-up forms, and no watermarks.
+                </p>
               </div>
             </div>
           </div>

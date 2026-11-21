@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Compress Signature to 20 KB Online - FormReady',
-  description: 'Crop and compress signatures strictly below 20 KB for online examination applications. 100% private, no signup, zero upload.',
+  description:
+    'Crop and compress signatures strictly below 20 KB for online examination applications. 100% private, no signup, zero upload.',
   alternates: { canonical: 'https://formready.vercel.app/signature-to-20kb' },
 };
 
@@ -37,12 +38,21 @@ export default function SignatureTo20KBPage() {
         faqs={[
           {
             question: 'Will my signature look pixelated?',
-            answer: 'No. By cropping empty whitespace before compression, the signature remains crisp and sharp.',
+            answer:
+              'No. By cropping empty whitespace before compression, the signature remains crisp and sharp.',
           },
         ]}
         relatedTools={[
-          { href: '/resize-signature', title: 'Signature Fixer', desc: 'Custom dimensions and threshold controls' },
-          { href: '/compress-image-to-50kb', title: 'Compress Photo to 50 KB', desc: 'Standard exam photo limit' },
+          {
+            href: '/resize-signature',
+            title: 'Signature Fixer',
+            desc: 'Custom dimensions and threshold controls',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress Photo to 50 KB',
+            desc: 'Standard exam photo limit',
+          },
         ]}
       />
     </div>

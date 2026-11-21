@@ -13,10 +13,7 @@ import {
 } from 'lucide-react';
 import { DropZone } from './DropZone';
 import { ValidationBadge } from './ValidationBadge';
-import {
-  processSignatureCanvas,
-  findSignatureBounds,
-} from '@/lib/signature-detector';
+import { processSignatureCanvas, findSignatureBounds } from '@/lib/signature-detector';
 import {
   compressImageToTarget,
   loadImageElement,
@@ -162,9 +159,7 @@ export function SignatureFixerTool({
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
           {pageHeading}
         </h1>
-        <p className="text-base text-slate-600 dark:text-slate-400">
-          {pageSubheading}
-        </p>
+        <p className="text-base text-slate-600 dark:text-slate-400">{pageSubheading}</p>
       </div>
 
       <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-8 shadow-sm space-y-6">

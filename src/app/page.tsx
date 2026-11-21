@@ -34,45 +34,75 @@ export default function HomePage() {
     {
       num: '1',
       title: t('step1_title', 'Upload or Paste'),
-      desc: t('step1_desc', 'Drag your rejected photo, phone snapshot, signature, or PDF. Even paste from clipboard (Ctrl+V).'),
+      desc: t(
+        'step1_desc',
+        'Drag your rejected photo, phone snapshot, signature, or PDF. Even paste from clipboard (Ctrl+V).',
+      ),
     },
     {
       num: '2',
       title: t('step2_title', 'Choose Target'),
-      desc: t('step2_desc', 'Select your portal requirement (e.g. 50 KB, 20 KB, UPSC, SSC, NEET, or custom dimensions).'),
+      desc: t(
+        'step2_desc',
+        'Select your portal requirement (e.g. 50 KB, 20 KB, UPSC, SSC, NEET, or custom dimensions).',
+      ),
     },
     {
       num: '3',
       title: t('step3_title', 'Exact Verification'),
-      desc: t('step3_desc', 'FormReady adjusts quality and dimensions iteratively, validating actual byte size before you download.'),
+      desc: t(
+        'step3_desc',
+        'FormReady adjusts quality and dimensions iteratively, validating actual byte size before you download.',
+      ),
     },
     {
       num: '4',
       title: t('step4_title', 'Download & Submit'),
-      desc: t('step4_desc', 'Get a clean, portal-compliant JPG or PDF that will not get rejected by automated validators.'),
+      desc: t(
+        'step4_desc',
+        'Get a clean, portal-compliant JPG or PDF that will not get rejected by automated validators.',
+      ),
     },
   ];
 
   const faqs = [
     {
       q: t('faq1_q', 'How does FormReady compress files without uploading them to a server?'),
-      a: t('faq1_a', 'FormReady uses the HTML5 Canvas API and WebAssembly directly in your web browser. When you select a photo, your computer or phone decodes the image, runs the optimization algorithms locally in memory, and creates the downloadable file. Zero bytes are uploaded.'),
+      a: t(
+        'faq1_a',
+        'FormReady uses the HTML5 Canvas API and WebAssembly directly in your web browser. When you select a photo, your computer or phone decodes the image, runs the optimization algorithms locally in memory, and creates the downloadable file. Zero bytes are uploaded.',
+      ),
     },
     {
-      q: t('faq2_q', 'Why did my government application form reject my file even though it looked right?'),
-      a: t('faq2_a', 'Online portals use strict automated validators. Common reasons for rejection include: file size being even 0.1 KB over the limit (e.g. 50.4 KB when 50 KB was required), wrong MIME type (PNG instead of JPG), dimensions slightly off aspect ratio, or phone EXIF rotation metadata causing sideways display.'),
+      q: t(
+        'faq2_q',
+        'Why did my government application form reject my file even though it looked right?',
+      ),
+      a: t(
+        'faq2_a',
+        'Online portals use strict automated validators. Common reasons for rejection include: file size being even 0.1 KB over the limit (e.g. 50.4 KB when 50 KB was required), wrong MIME type (PNG instead of JPG), dimensions slightly off aspect ratio, or phone EXIF rotation metadata causing sideways display.',
+      ),
     },
     {
       q: t('faq3_q', 'What is the target safety margin in FormReady?'),
-      a: t('faq3_a', 'When you choose a target such as 50 KB, FormReady aims approximately 3-4% below that ceiling (e.g. 48.5 KB - 49.2 KB). This prevents file system cluster rounding or portal parser variance from causing a rejection.'),
+      a: t(
+        'faq3_a',
+        'When you choose a target such as 50 KB, FormReady aims approximately 3-4% below that ceiling (e.g. 48.5 KB - 49.2 KB). This prevents file system cluster rounding or portal parser variance from causing a rejection.',
+      ),
     },
     {
       q: t('faq4_q', 'Can FormReady fix faint or shadowy signatures taken from a phone camera?'),
-      a: t('faq4_a', 'Yes! Our Signature Fixer includes an auto-trim algorithm that removes excessive white paper margins and boosts contrast, converting shadows and yellowish phone paper into clean pure white while sharpening black or blue ink strokes.'),
+      a: t(
+        'faq4_a',
+        'Yes! Our Signature Fixer includes an auto-trim algorithm that removes excessive white paper margins and boosts contrast, converting shadows and yellowish phone paper into clean pure white while sharpening black or blue ink strokes.',
+      ),
     },
     {
       q: t('faq5_q', 'Will this work on a mobile phone without internet after loading?'),
-      a: t('faq5_a', 'Yes. Once the web application is loaded in your browser, all image compression and signature processing continues functioning completely offline because no server backend is required.'),
+      a: t(
+        'faq5_a',
+        'Yes. Once the web application is loaded in your browser, all image compression and signature processing continues functioning completely offline because no server backend is required.',
+      ),
     },
   ];
 
@@ -101,7 +131,10 @@ export default function HomePage() {
         <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
           {t('hero_subtitle_1', 'No signup. No subscription. No watermark. No upload.')} <br />
           <span className="text-slate-500 dark:text-slate-400 text-sm sm:text-base">
-            {t('hero_subtitle_2', 'Your photos, signatures, and documents stay strictly in your browser.')}
+            {t(
+              'hero_subtitle_2',
+              'Your photos, signatures, and documents stay strictly in your browser.',
+            )}
           </span>
         </p>
 
@@ -142,10 +175,7 @@ export default function HomePage() {
 
       {/* Main Interactive Tool immediately on landing page */}
       <section className="max-w-4xl mx-auto relative z-10">
-        <ImageCompressorTool
-          initialTargetKB={50}
-          initialFormat="image/jpeg"
-        />
+        <ImageCompressorTool initialTargetKB={50} initialFormat="image/jpeg" />
       </section>
 
       {/* Trust & Psychological Peace-of-Mind Strip */}
@@ -160,7 +190,10 @@ export default function HomePage() {
                 {t('trust_privacy_title', '100% Client-Side Privacy')}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                {t('trust_privacy_desc', 'Zero bytes leave your browser. Processing runs in browser memory using HTML5 Canvas & WebAssembly.')}
+                {t(
+                  'trust_privacy_desc',
+                  'Zero bytes leave your browser. Processing runs in browser memory using HTML5 Canvas & WebAssembly.',
+                )}
               </p>
             </div>
           </div>
@@ -174,7 +207,10 @@ export default function HomePage() {
                 {t('trust_guarantee_title', 'Binary-Search Target Guarantee')}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                {t('trust_guarantee_desc', 'We never guess quality. Our algorithm iterates until the actual file size is safely below your portal limit.')}
+                {t(
+                  'trust_guarantee_desc',
+                  'We never guess quality. Our algorithm iterates until the actual file size is safely below your portal limit.',
+                )}
               </p>
             </div>
           </div>
@@ -188,7 +224,10 @@ export default function HomePage() {
                 {t('trust_free_title', 'Instant & Free Forever')}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                {t('trust_free_desc', 'No login walls, no payment requests, no watermarks, and works offline once loaded.')}
+                {t(
+                  'trust_free_desc',
+                  'No login walls, no payment requests, no watermarks, and works offline once loaded.',
+                )}
               </p>
             </div>
           </div>
@@ -202,7 +241,10 @@ export default function HomePage() {
             {t('how_title', 'How FormReady Solves File Rejections')}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
-            {t('how_subtitle', 'Solve government examination, university, and visa portal rejections in under 30 seconds.')}
+            {t(
+              'how_subtitle',
+              'Solve government examination, university, and visa portal rejections in under 30 seconds.',
+            )}
           </p>
         </div>
 
@@ -231,7 +273,10 @@ export default function HomePage() {
             {t('popular_tools_title', 'All File Preparation Tools')}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            {t('popular_tools_subtitle', 'Dedicated utilities engineered for specific portal rejection reasons.')}
+            {t(
+              'popular_tools_subtitle',
+              'Dedicated utilities engineered for specific portal rejection reasons.',
+            )}
           </p>
         </div>
 
@@ -266,7 +311,10 @@ export default function HomePage() {
             {t('faq_title', 'Frequently Asked Questions')}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            {t('faq_subtitle', 'Everything you need to know about preparing your application files safely.')}
+            {t(
+              'faq_subtitle',
+              'Everything you need to know about preparing your application files safely.',
+            )}
           </p>
         </div>
 

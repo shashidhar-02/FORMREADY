@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Compress PDF Online Free (Zero Upload) - FormReady',
-  description: 'Reduce PDF file size in your browser with object stream optimization. Zero server upload, honest Before/After comparison.',
+  description:
+    'Reduce PDF file size in your browser with object stream optimization. Zero server upload, honest Before/After comparison.',
   alternates: { canonical: 'https://formready.vercel.app/compress-pdf' },
 };
 
@@ -26,14 +27,17 @@ export default function CompressPdfPage() {
         ]}
         commonMistakes={[
           {
-            mistake: 'Websites that generate compressed PDFs that are actually larger than the original.',
-            solution: 'FormReady only applies valid stream optimizations and displays verified byte counters.',
+            mistake:
+              'Websites that generate compressed PDFs that are actually larger than the original.',
+            solution:
+              'FormReady only applies valid stream optimizations and displays verified byte counters.',
           },
         ]}
         faqs={[
           {
             question: 'Will text clarity in my document be affected?',
-            answer: 'No. Structural object stream compression is lossless and preserves sharp vector text.',
+            answer:
+              'No. Structural object stream compression is lossless and preserves sharp vector text.',
           },
         ]}
         relatedTools={[

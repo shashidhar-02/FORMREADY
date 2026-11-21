@@ -1,14 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  FileText,
-  Download,
-  RefreshCw,
-  CheckCircle2,
-  AlertCircle,
-  Minimize2,
-} from 'lucide-react';
+import { FileText, Download, RefreshCw, CheckCircle2, AlertCircle, Minimize2 } from 'lucide-react';
 import { DropZone } from './DropZone';
 import { compressPdfDocument } from '@/lib/pdf-service';
 import { formatBytes } from '@/lib/image-compressor';
@@ -84,7 +77,8 @@ export function PdfCompressTool() {
           Browser-Based PDF Compressor
         </h1>
         <p className="text-base text-slate-600 dark:text-slate-400">
-          Optimize PDF object streams and structure locally without uploading your documents to a remote server.
+          Optimize PDF object streams and structure locally without uploading your documents to a
+          remote server.
         </p>
       </div>
 

@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Resize & Clean Signature for Online Forms - FormReady',
-  description: 'Auto-trim white borders from signature snapshots, remove paper shadows, and fit 10 KB to 20 KB portal limits. 100% in browser.',
+  description:
+    'Auto-trim white borders from signature snapshots, remove paper shadows, and fit 10 KB to 20 KB portal limits. 100% in browser.',
   alternates: { canonical: 'https://formready.vercel.app/resize-signature' },
 };
 
@@ -49,13 +50,21 @@ export default function ResizeSignaturePage() {
           {
             question: 'Does FormReady store my signature?',
             answer:
-              'Never. Your signature is processed exclusively inside your browser\'s memory. FormReady has no server upload endpoints or database.',
+              "Never. Your signature is processed exclusively inside your browser's memory. FormReady has no server upload endpoints or database.",
           },
         ]}
         relatedTools={[
           { href: '/signature-to-20kb', title: 'Signature to 20 KB', desc: 'Direct 20 KB preset' },
-          { href: '/resize-photo', title: 'Passport Photo Resizer', desc: 'Format your application photo' },
-          { href: '/compress-image-to-20kb', title: 'Compress to 20 KB', desc: 'Standard 20 KB compressor' },
+          {
+            href: '/resize-photo',
+            title: 'Passport Photo Resizer',
+            desc: 'Format your application photo',
+          },
+          {
+            href: '/compress-image-to-20kb',
+            title: 'Compress to 20 KB',
+            desc: 'Standard 20 KB compressor',
+          },
         ]}
       />
     </div>

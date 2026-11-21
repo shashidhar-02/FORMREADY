@@ -47,8 +47,8 @@ export function JpgToPdfTool() {
   const handleRotate = (id: string) => {
     setItems((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, rotation: (item.rotation + 90) % 360 } : item
-      )
+        item.id === id ? { ...item, rotation: (item.rotation + 90) % 360 } : item,
+      ),
     );
   };
 
@@ -121,7 +121,8 @@ export function JpgToPdfTool() {
           Convert JPG & PNG to Single PDF
         </h1>
         <p className="text-base text-slate-600 dark:text-slate-400">
-          Reorder pages, rotate sideways photos, set margins, and bundle multiple certificates into one clean PDF.
+          Reorder pages, rotate sideways photos, set margins, and bundle multiple certificates into
+          one clean PDF.
         </p>
       </div>
 
@@ -158,7 +159,9 @@ export function JpgToPdfTool() {
                   className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 p-3 flex flex-col justify-between space-y-2 relative group"
                 >
                   <div className="flex items-center justify-between text-xs text-slate-500">
-                    <span className="font-bold text-slate-700 dark:text-slate-300">Page {idx + 1}</span>
+                    <span className="font-bold text-slate-700 dark:text-slate-300">
+                      Page {idx + 1}
+                    </span>
                     <span>{formatBytes(item.file.size)}</span>
                   </div>
 

@@ -4,7 +4,8 @@ import { SizeCompressorPage } from '@/components/SizeCompressorPage';
 
 export const metadata: Metadata = {
   title: 'Compress Image to 10 KB Online - FormReady',
-  description: 'Compress signatures and thumb impressions strictly under 10 KB for exam applications. Zero upload, 100% in-browser.',
+  description:
+    'Compress signatures and thumb impressions strictly under 10 KB for exam applications. Zero upload, 100% in-browser.',
   alternates: { canonical: 'https://formready.vercel.app/compress-image-to-10kb' },
 };
 

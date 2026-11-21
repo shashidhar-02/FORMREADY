@@ -28,9 +28,9 @@ describe('Signature Whitespace and Stroke Detection', () => {
     for (let y = 30; y <= 60; y++) {
       for (let x = 20; x <= 70; x++) {
         // Draw a diagonal line
-        if (Math.abs((y - 30) - (x - 20) * 0.6) < 2) {
+        if (Math.abs(y - 30 - (x - 20) * 0.6) < 2) {
           const idx = (y * width + x) * 4;
-          data[idx] = 10;     // dark R
+          data[idx] = 10; // dark R
           data[idx + 1] = 10; // dark G
           data[idx + 2] = 20; // dark B
           data[idx + 3] = 255;

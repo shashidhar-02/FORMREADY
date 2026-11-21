@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Resize Image Dimensions Online - FormReady',
-  description: 'Resize image width and height to exact pixel dimensions, percentage, or aspect ratio. Zero uploads, 100% in browser.',
+  description:
+    'Resize image width and height to exact pixel dimensions, percentage, or aspect ratio. Zero uploads, 100% in browser.',
   alternates: { canonical: 'https://formready.vercel.app/resize-image' },
 };
 
@@ -39,8 +40,7 @@ export default function ResizeImagePage() {
         faqs={[
           {
             question: 'Will resizing change the file format?',
-            answer:
-              'You can choose to keep the original format or export as JPG, PNG, or WebP.',
+            answer: 'You can choose to keep the original format or export as JPG, PNG, or WebP.',
           },
           {
             question: 'Can I resize by percentage instead of pixels?',
@@ -49,9 +49,21 @@ export default function ResizeImagePage() {
           },
         ]}
         relatedTools={[
-          { href: '/resize-photo', title: 'Passport Photo Resizer', desc: 'Standard 35x45mm and 1:1 ratios' },
-          { href: '/resize-signature', title: 'Signature Fixer', desc: 'Auto-trim whitespace and resize signature' },
-          { href: '/compress-image', title: 'Compress Image', desc: 'Target exact file size in KB' },
+          {
+            href: '/resize-photo',
+            title: 'Passport Photo Resizer',
+            desc: 'Standard 35x45mm and 1:1 ratios',
+          },
+          {
+            href: '/resize-signature',
+            title: 'Signature Fixer',
+            desc: 'Auto-trim whitespace and resize signature',
+          },
+          {
+            href: '/compress-image',
+            title: 'Compress Image',
+            desc: 'Target exact file size in KB',
+          },
         ]}
       />
     </div>

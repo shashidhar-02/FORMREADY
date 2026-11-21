@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "prepare": "husky"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
@@ -28,11 +29,29 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "husky": "^9.1.7",
     "jsdom": "^31.0.1",
+    "lint-staged": "^17.6.1",
     "postcss": "^8.5.33",
+    "prettier": "^3.10.1",
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vite": "^8.3.8",
     "vitest": "^5.1.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "printWidth": 100
   }
 }

@@ -12,10 +12,7 @@ export const PAGE_SIZES = {
 /**
  * Helper to convert an image File or Blob to JPEG bytes for embedding in PDF.
  */
-async function getNormalizedJpgBytes(
-  file: File,
-  quality: number = 0.85
-): Promise<Uint8Array> {
+async function getNormalizedJpgBytes(file: File, quality: number = 0.85): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
@@ -43,7 +40,7 @@ async function getNormalizedJpgBytes(
           resolve(new Uint8Array(buf));
         },
         'image/jpeg',
-        quality
+        quality,
       );
     };
     img.onerror = () => {
@@ -59,7 +56,7 @@ async function getNormalizedJpgBytes(
  */
 export async function imagesToPdf(
   images: PdfImageItem[],
-  options: PdfConversionOptions
+  options: PdfConversionOptions,
 ): Promise<Blob> {
   if (images.length === 0) {
     throw new Error('At least one image is required to generate a PDF.');
@@ -131,7 +128,7 @@ export async function imagesToPdf(
   const pdfBytes = await pdfDoc.save();
   const arrayBuffer = pdfBytes.buffer.slice(
     pdfBytes.byteOffset,
-    pdfBytes.byteOffset + pdfBytes.byteLength
+    pdfBytes.byteOffset + pdfBytes.byteLength,
   ) as ArrayBuffer;
   return new Blob([arrayBuffer], { type: 'application/pdf' });
 }
@@ -156,7 +153,7 @@ export async function mergePdfFiles(files: File[]): Promise<Blob> {
   const mergedBytes = await mergedDoc.save();
   const arrayBuffer = mergedBytes.buffer.slice(
     mergedBytes.byteOffset,
-    mergedBytes.byteOffset + mergedBytes.byteLength
+    mergedBytes.byteOffset + mergedBytes.byteLength,
   ) as ArrayBuffer;
   return new Blob([arrayBuffer], { type: 'application/pdf' });
 }
@@ -164,10 +161,7 @@ export async function mergePdfFiles(files: File[]): Promise<Blob> {
 /**
  * Splits / extracts pages from a PDF file.
  */
-export async function extractPdfPages(
-  file: File,
-  pageIndicesToKeep: number[]
-): Promise<Blob> {
+export async function extractPdfPages(file: File, pageIndicesToKeep: number[]): Promise<Blob> {
   if (pageIndicesToKeep.length === 0) {
     throw new Error('Please select at least one page to extract.');
   }
@@ -182,7 +176,7 @@ export async function extractPdfPages(
   const resultBytes = await newDoc.save();
   const arrayBuffer = resultBytes.buffer.slice(
     resultBytes.byteOffset,
-    resultBytes.byteOffset + resultBytes.byteLength
+    resultBytes.byteOffset + resultBytes.byteLength,
   ) as ArrayBuffer;
   return new Blob([arrayBuffer], { type: 'application/pdf' });
 }
@@ -192,7 +186,7 @@ export async function extractPdfPages(
  */
 export async function rotatePdfPages(
   file: File,
-  rotations: Record<number, number> // pageIndex -> degrees (e.g. 90, 180, 270)
+  rotations: Record<number, number>, // pageIndex -> degrees (e.g. 90, 180, 270)
 ): Promise<Blob> {
   const fileBytes = await file.arrayBuffer();
   const doc = await PDFDocument.load(fileBytes, { ignoreEncryption: true });
@@ -209,7 +203,7 @@ export async function rotatePdfPages(
   const bytes = await doc.save();
   const arrayBuffer = bytes.buffer.slice(
     bytes.byteOffset,
-    bytes.byteOffset + bytes.byteLength
+    bytes.byteOffset + bytes.byteLength,
   ) as ArrayBuffer;
   return new Blob([arrayBuffer], { type: 'application/pdf' });
 }
@@ -220,7 +214,7 @@ export async function rotatePdfPages(
  */
 export async function compressPdfDocument(
   file: File,
-  qualityFactor: number = 0.8
+  qualityFactor: number = 0.8,
 ): Promise<{ blob: Blob; originalSize: number; newSize: number; reductionPercent: number }> {
   const fileBytes = await file.arrayBuffer();
   const originalSize = file.size;
@@ -238,7 +232,7 @@ export async function compressPdfDocument(
 
   const arrayBuffer = compressedBytes.buffer.slice(
     compressedBytes.byteOffset,
-    compressedBytes.byteOffset + compressedBytes.byteLength
+    compressedBytes.byteOffset + compressedBytes.byteLength,
   ) as ArrayBuffer;
   const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
   const newSize = blob.size;

@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Passport & Photo Resizer for Online Forms - FormReady',
-  description: 'Crop and resize passport photos to 35x45mm, 1:1, or 4:5 ratios with face alignment guide and optional 4x6 printable sheets.',
+  description:
+    'Crop and resize passport photos to 35x45mm, 1:1, or 4:5 ratios with face alignment guide and optional 4x6 printable sheets.',
   alternates: { canonical: 'https://formready.vercel.app/resize-photo' },
 };
 
@@ -52,9 +53,21 @@ export default function ResizePhotoPage() {
           },
         ]}
         relatedTools={[
-          { href: '/resize-signature', title: 'Signature Fixer', desc: 'Trim white borders & boost contrast' },
-          { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'Strict 50 KB limit for exam photos' },
-          { href: '/jpg-to-pdf', title: 'JPG to PDF', desc: 'Combine ID photos and marksheets into PDF' },
+          {
+            href: '/resize-signature',
+            title: 'Signature Fixer',
+            desc: 'Trim white borders & boost contrast',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress to 50 KB',
+            desc: 'Strict 50 KB limit for exam photos',
+          },
+          {
+            href: '/jpg-to-pdf',
+            title: 'JPG to PDF',
+            desc: 'Combine ID photos and marksheets into PDF',
+          },
         ]}
       />
     </div>

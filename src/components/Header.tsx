@@ -3,19 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  ShieldCheck,
-  Moon,
-  Sun,
-  Laptop,
-  Menu,
-  X,
-  FileCheck2,
-} from 'lucide-react';
+import { ShieldCheck, Moon, Sun, Laptop, Menu, X, FileCheck2 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { PrivacyModal } from '@/components/PrivacyModal';
-import { GlobalSearch } from '@/components/GlobalSearch';
+import { GlobalSearch, SearchTrigger } from '@/components/GlobalSearch';
 import { SupportedLanguage } from '@/types';
 
 export function Header() {
@@ -24,6 +16,7 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navLinks = [
     { href: '/compress-image', label: t('nav_compress', 'Compress') },
@@ -83,9 +76,9 @@ export function Header() {
             </nav>
           </div>
 
-          {/* Global Search Bar on Top */}
-          <div className="flex-1 max-w-xs sm:max-w-sm md:max-w-md mx-1 sm:mx-2">
-            <GlobalSearch />
+          {/* Global Search Trigger */}
+          <div className="flex-1 flex justify-center mx-1 sm:mx-2">
+            <SearchTrigger onClick={() => setIsSearchOpen(true)} />
           </div>
 
           {/* Right Action Bar */}
@@ -102,7 +95,9 @@ export function Header() {
 
             {/* Language Selector */}
             <div className="relative hidden sm:flex items-center">
-              <label htmlFor="lang-select" className="sr-only">Language</label>
+              <label htmlFor="lang-select" className="sr-only">
+                Language
+              </label>
               <select
                 id="lang-select"
                 value={language}
@@ -126,7 +121,9 @@ export function Header() {
               {theme === 'system' ? (
                 <>
                   <Laptop className="w-3.5 h-3.5 text-sky-500" />
-                  <span className="hidden sm:inline text-[11px]">{t('theme_system', 'System')}</span>
+                  <span className="hidden sm:inline text-[11px]">
+                    {t('theme_system', 'System')}
+                  </span>
                 </>
               ) : theme === 'dark' ? (
                 <>
@@ -196,6 +193,9 @@ export function Header() {
 
       {/* Privacy Guarantee Explanation Modal */}
       <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+
+      {/* Global Search Command Palette (portal) */}
+      {isSearchOpen && <GlobalSearch />}
     </>
   );
 }

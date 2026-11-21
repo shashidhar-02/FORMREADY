@@ -12,7 +12,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     nav_presets: 'Exam Presets',
     search_placeholder: 'Search tools, presets (50KB, UPSC, SSC, PDF)...',
     badge_local_only: 'Processed locally',
-    badge_local_desc: 'Your files are processed in this browser using WebAssembly and Canvas. FormReady does not upload your files to any processing server.',
+    badge_local_desc:
+      'Your files are processed in this browser using WebAssembly and Canvas. FormReady does not upload your files to any processing server.',
     theme_system: 'System',
     theme_dark: 'Dark',
     theme_light: 'Light',
@@ -39,7 +40,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Controls
     target_size_label: 'Maximum File Size Target',
-    target_size_note: 'Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.',
+    target_size_note:
+      'Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.',
     target_format_label: 'Output Format',
     target_format_note: 'Govt exam portals almost universally require JPG/JPEG.',
     exact_dims_label: 'Optional Exact Dimensions (Width × Height)',
@@ -70,23 +72,31 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Trust & Psychology Strip
     trust_privacy_title: '100% Client-Side Privacy',
-    trust_privacy_desc: 'Zero bytes leave your browser. Processing runs in browser memory using HTML5 Canvas & WebAssembly.',
+    trust_privacy_desc:
+      'Zero bytes leave your browser. Processing runs in browser memory using HTML5 Canvas & WebAssembly.',
     trust_guarantee_title: 'Binary-Search Target Guarantee',
-    trust_guarantee_desc: 'We never guess quality. Our algorithm iterates until the actual file size is safely below your portal limit.',
+    trust_guarantee_desc:
+      'We never guess quality. Our algorithm iterates until the actual file size is safely below your portal limit.',
     trust_free_title: 'Instant & Free Forever',
-    trust_free_desc: 'No login walls, no payment requests, no watermarks, and works offline once loaded.',
+    trust_free_desc:
+      'No login walls, no payment requests, no watermarks, and works offline once loaded.',
 
     // How it works
     how_title: 'How FormReady Solves File Rejections',
-    how_subtitle: 'Solve government examination, university, and visa portal rejections in under 30 seconds.',
+    how_subtitle:
+      'Solve government examination, university, and visa portal rejections in under 30 seconds.',
     step1_title: 'Upload or Paste',
-    step1_desc: 'Drag your rejected photo, phone snapshot, signature, or PDF. Even paste from clipboard (Ctrl+V).',
+    step1_desc:
+      'Drag your rejected photo, phone snapshot, signature, or PDF. Even paste from clipboard (Ctrl+V).',
     step2_title: 'Choose Target',
-    step2_desc: 'Select your portal requirement (e.g. 50 KB, 20 KB, UPSC, SSC, NEET, or custom dimensions).',
+    step2_desc:
+      'Select your portal requirement (e.g. 50 KB, 20 KB, UPSC, SSC, NEET, or custom dimensions).',
     step3_title: 'Exact Verification',
-    step3_desc: 'FormReady adjusts quality and dimensions iteratively, validating actual byte size before you download.',
+    step3_desc:
+      'FormReady adjusts quality and dimensions iteratively, validating actual byte size before you download.',
     step4_title: 'Download & Submit',
-    step4_desc: 'Get a clean, portal-compliant JPG or PDF that will not get rejected by automated validators.',
+    step4_desc:
+      'Get a clean, portal-compliant JPG or PDF that will not get rejected by automated validators.',
 
     // Popular Tools
     popular_tools_title: 'All File Preparation Tools',
@@ -95,7 +105,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Signature Fixer
     sig_title: 'Signature Fixer for Online Forms',
-    sig_subtitle: 'Take a photo of your signature with your phone. FormReady automatically crops excessive white paper, boosts ink contrast, and fits strict 10–20 KB portal limits.',
+    sig_subtitle:
+      'Take a photo of your signature with your phone. FormReady automatically crops excessive white paper, boosts ink contrast, and fits strict 10–20 KB portal limits.',
     sig_auto_trim_title: 'Auto-Trim White Borders',
     sig_auto_trim_desc: 'Detects ink strokes and removes empty paper around your signature.',
     sig_contrast_title: 'Clean Background & Ink Boost',
@@ -105,7 +116,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Passport Photo
     passport_title: 'Passport & Application Photo Resizer',
-    passport_subtitle: 'Crop to 35×45mm, 1:1 square, or 4:5 ratios, align your face with the guide overlay, and fit portal KB limits.',
+    passport_subtitle:
+      'Crop to 35×45mm, 1:1 square, or 4:5 ratios, align your face with the guide overlay, and fit portal KB limits.',
     passport_face_guide: 'Show Face Oval Alignment Guide',
     passport_head_label: 'Top of Head',
     passport_chin_label: 'Chin Line',
@@ -121,30 +133,40 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // PDF Tools
     pdf_jpg_title: 'Convert JPG & PNG to Single PDF',
-    pdf_jpg_subtitle: 'Reorder pages, rotate sideways photos, set margins, and bundle multiple certificates into one clean PDF.',
+    pdf_jpg_subtitle:
+      'Reorder pages, rotate sideways photos, set margins, and bundle multiple certificates into one clean PDF.',
     pdf_merge_title: 'Merge Multiple PDF Documents',
-    pdf_merge_subtitle: 'Combine multiple PDF certificates and application forms into one single document.',
+    pdf_merge_subtitle:
+      'Combine multiple PDF certificates and application forms into one single document.',
     pdf_split_title: 'Split & Extract PDF Pages',
-    pdf_split_subtitle: 'Extract selected pages from a multi-page PDF directly in your browser without uploading.',
+    pdf_split_subtitle:
+      'Extract selected pages from a multi-page PDF directly in your browser without uploading.',
     pdf_compress_title: 'Browser-Based PDF Compressor',
-    pdf_compress_subtitle: 'Optimize PDF object streams and structure locally without uploading your documents to a remote server.',
+    pdf_compress_subtitle:
+      'Optimize PDF object streams and structure locally without uploading your documents to a remote server.',
 
     // FAQ
     faq_title: 'Frequently Asked Questions',
     faq_subtitle: 'Everything you need to know about preparing your application files safely.',
     faq1_q: 'How does FormReady compress files without uploading them to a server?',
-    faq1_a: 'FormReady uses the HTML5 Canvas API and WebAssembly directly in your web browser. When you select a photo, your computer or phone decodes the image, runs the optimization algorithms locally in memory, and creates the downloadable file. Zero bytes are uploaded.',
+    faq1_a:
+      'FormReady uses the HTML5 Canvas API and WebAssembly directly in your web browser. When you select a photo, your computer or phone decodes the image, runs the optimization algorithms locally in memory, and creates the downloadable file. Zero bytes are uploaded.',
     faq2_q: 'Why did my government application form reject my file even though it looked right?',
-    faq2_a: 'Online portals use strict automated validators. Common reasons for rejection include: file size being even 0.1 KB over the limit (e.g. 50.4 KB when 50 KB was required), wrong MIME type (PNG instead of JPG), dimensions slightly off aspect ratio, or phone EXIF rotation metadata causing sideways display.',
+    faq2_a:
+      'Online portals use strict automated validators. Common reasons for rejection include: file size being even 0.1 KB over the limit (e.g. 50.4 KB when 50 KB was required), wrong MIME type (PNG instead of JPG), dimensions slightly off aspect ratio, or phone EXIF rotation metadata causing sideways display.',
     faq3_q: 'What is the target safety margin in FormReady?',
-    faq3_a: 'When you choose a target such as 50 KB, FormReady aims approximately 3-4% below that ceiling (e.g. 48.5 KB - 49.2 KB). This prevents file system cluster rounding or portal parser variance from causing a rejection.',
+    faq3_a:
+      'When you choose a target such as 50 KB, FormReady aims approximately 3-4% below that ceiling (e.g. 48.5 KB - 49.2 KB). This prevents file system cluster rounding or portal parser variance from causing a rejection.',
     faq4_q: 'Can FormReady fix faint or shadowy signatures taken from a phone camera?',
-    faq4_a: 'Yes! Our Signature Fixer includes an auto-trim algorithm that removes excessive white paper margins and boosts contrast, converting shadows and yellowish phone paper into clean pure white while sharpening black or blue ink strokes.',
+    faq4_a:
+      'Yes! Our Signature Fixer includes an auto-trim algorithm that removes excessive white paper margins and boosts contrast, converting shadows and yellowish phone paper into clean pure white while sharpening black or blue ink strokes.',
     faq5_q: 'Will this work on a mobile phone without internet after loading?',
-    faq5_a: 'Yes. Once the web application is loaded in your browser, all image compression and signature processing continues functioning completely offline because no server backend is required.',
+    faq5_a:
+      'Yes. Once the web application is loaded in your browser, all image compression and signature processing continues functioning completely offline because no server backend is required.',
 
     // Footer
-    footer_desc: 'The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.',
+    footer_desc:
+      'The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.',
     footer_privacy: 'Zero server uploads. 100% client-side execution.',
     clear_local_data: 'Clear local data & preferences',
     clear_local_done: 'Local storage cleared!',
@@ -161,7 +183,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     nav_presets: 'परीक्षा प्रीसेट्स',
     search_placeholder: 'टूल या परीक्षा खोजें (50KB, UPSC, SSC, PDF)...',
     badge_local_only: '100% लोकल प्रोसेसिंग',
-    badge_local_desc: 'आपकी फाइलें आपके ब्राउज़र में ही प्रोसेस होती हैं। फॉर्म-रेडी आपकी फाइलें किसी भी सर्वर पर अपलोड नहीं करता है।',
+    badge_local_desc:
+      'आपकी फाइलें आपके ब्राउज़र में ही प्रोसेस होती हैं। फॉर्म-रेडी आपकी फाइलें किसी भी सर्वर पर अपलोड नहीं करता है।',
     theme_system: 'सिस्टम',
     theme_dark: 'डार्क',
     theme_light: 'लाइट',
@@ -221,7 +244,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     trust_privacy_title: '100% पूर्ण गोपनीयता',
     trust_privacy_desc: 'आपकी डिवाइस से 1 बाइट भी बाहर नहीं जाती। सारा काम सीधे आपके ब्राउज़र में होता है।',
     trust_guarantee_title: 'सटीक KB साइज़ गारंटी',
-    trust_guarantee_desc: 'हम अंदाज़ा नहीं लगाते। हमारा बाइनरी-सर्च एल्गोरिदम फ़ाइल को पोर्टल की सीमा के भीतर ही रखता है।',
+    trust_guarantee_desc:
+      'हम अंदाज़ा नहीं लगाते। हमारा बाइनरी-सर्च एल्गोरिदम फ़ाइल को पोर्टल की सीमा के भीतर ही रखता है।',
     trust_free_title: 'हमेशा मुफ़्त और तुरंत',
     trust_free_desc: 'कोई लॉगिन नहीं, कोई पेमेंट नहीं, कोई वॉटरमार्क नहीं, और इंटरनेट के बिना भी काम करता है।',
 
@@ -244,7 +268,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Signature Fixer
     sig_title: 'सरकारी फॉर्म हेतु हस्ताक्षर फ़िक्सर',
-    sig_subtitle: 'मोबाइल से हस्ताक्षर की फोटो खींचें। फॉर्म-रेडी खाली सफ़ेद जगह काट देगा, परछाईं हटाएगा और 10-20 KB में सेट करेगा।',
+    sig_subtitle:
+      'मोबाइल से हस्ताक्षर की फोटो खींचें। फॉर्म-रेडी खाली सफ़ेद जगह काट देगा, परछाईं हटाएगा और 10-20 KB में सेट करेगा।',
     sig_auto_trim_title: 'खाली सफ़ेद बॉर्डर अपने-आप हटाएं',
     sig_auto_trim_desc: 'स्याही को पहचानकर हस्ताक्षर के चारों ओर की बेकार कागज़ की जगह हटाता है।',
     sig_contrast_title: 'परछाईं हटाएं और स्याही साफ़ करें',
@@ -254,7 +279,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Passport Photo
     passport_title: 'पासपोर्ट और फॉर्म फोटो मेकर',
-    passport_subtitle: '35×45mm या 1:1 स्क्वायर में क्रॉप करें, चेहरे को गाइड में सेट करें और 50 KB में डाउनलोड करें।',
+    passport_subtitle:
+      '35×45mm या 1:1 स्क्वायर में क्रॉप करें, चेहरे को गाइड में सेट करें और 50 KB में डाउनलोड करें।',
     passport_face_guide: 'चेहरा संरेखण गाइड दिखाएं (Oval Guide)',
     passport_head_label: 'सिर का ऊपरी भाग',
     passport_chin_label: 'ठोड़ी (Chin Line)',
@@ -282,18 +308,22 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     faq_title: 'अक्सर पूछे जाने वाले सवाल (FAQ)',
     faq_subtitle: 'दस्तावेज़ और फोटो को सही तरीके से तैयार करने की पूरी जानकारी।',
     faq1_q: 'फॉर्म-रेडी बिना सर्वर के फाइल कैसे कंप्रेस करता है?',
-    faq1_a: 'फॉर्म-रेडी आपके वेब ब्राउज़र के HTML5 Canvas और WebAssembly तकनीक का उपयोग करता है। जब आप कोई फोटो चुनते हैं, तो आपका फोन या कंप्यूटर ही फाइल को प्रोसेस करता है। इंटरनेट पर कोई फाइल नहीं भेजी जाती।',
+    faq1_a:
+      'फॉर्म-रेडी आपके वेब ब्राउज़र के HTML5 Canvas और WebAssembly तकनीक का उपयोग करता है। जब आप कोई फोटो चुनते हैं, तो आपका फोन या कंप्यूटर ही फाइल को प्रोसेस करता है। इंटरनेट पर कोई फाइल नहीं भेजी जाती।',
     faq2_q: 'सरकारी फॉर्म ने मेरी फाइल क्यों रिजेक्ट कर दी?',
-    faq2_a: 'पोर्टल स्वचालित कंप्यूटर प्रोग्राम से फाइल चेक करते हैं। यदि फाइल 50 KB से 0.1 KB भी अधिक (जैसे 50.2 KB) हो, या फॉर्मेट PNG हो, तो पोर्टल तुरंत रिजेक्ट कर देता है।',
+    faq2_a:
+      'पोर्टल स्वचालित कंप्यूटर प्रोग्राम से फाइल चेक करते हैं। यदि फाइल 50 KB से 0.1 KB भी अधिक (जैसे 50.2 KB) हो, या फॉर्मेट PNG हो, तो पोर्टल तुरंत रिजेक्ट कर देता है।',
     faq3_q: 'क्या फॉर्म-रेडी फोन से खींचे हल्के या छाया वाले हस्ताक्षर ठीक कर सकता है?',
-    faq3_a: 'हाँ! हमारा सिग्नेचर फिक्सर टूल कागज़ की पीलापन और छाया को हटाकर बिल्कुल दूध जैसा सफ़ेद बनाता है और स्याही को गहरा कर देता है।',
+    faq3_a:
+      'हाँ! हमारा सिग्नेचर फिक्सर टूल कागज़ की पीलापन और छाया को हटाकर बिल्कुल दूध जैसा सफ़ेद बनाता है और स्याही को गहरा कर देता है।',
     faq4_q: 'क्या यह इंटरनेट बंद होने पर भी काम करेगा?',
     faq4_a: 'हाँ, एक बार वेबसाइट लोड होने के बाद आप एयरप्लेन मोड में भी फोटो और सिग्नेचर कंप्रेस कर सकते हैं।',
     faq5_q: 'क्या फॉर्म-रेडी मेरी फोटो या हस्ताक्षर को सेव करता है?',
     faq5_a: 'बिल्कुल नहीं। हमारे पास कोई डाटाबेस या सर्वर नहीं है। आपकी फाइल केवल आपके हाथ में है।',
 
     // Footer
-    footer_desc: 'सरकारी परीक्षाओं, कॉलेज दाखिलों, वीज़ा और नौकरियों के लिए 100% सुरक्षित और स्थानीय फाइल टूल।',
+    footer_desc:
+      'सरकारी परीक्षाओं, कॉलेज दाखिलों, वीज़ा और नौकरियों के लिए 100% सुरक्षित और स्थानीय फाइल टूल।',
     footer_privacy: 'सर्वर पर कोई अपलोड नहीं। 100% डिवाइस में काम करता है।',
     clear_local_data: 'लोकल सेटिंग्स साफ़ करें',
     clear_local_done: 'लोकल डेटा साफ़ कर दिया गया!',
@@ -393,7 +423,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
 
     // Signature Fixer
     sig_title: 'ఆన్‌లైన్ దరఖాస్తుల సంతకం సరిదిద్దే టూల్',
-    sig_subtitle: 'ఫోన్ కెమెరాతో సంతకం ఫోటో తీయండి. ఫారమ్‌రెడీ ఖాళీ తెల్లటి బోర్డర్లను తొలగించి, నీడలను పోగొట్టి 10-20 KBకి మారుస్తుంది.',
+    sig_subtitle:
+      'ఫోన్ కెమెరాతో సంతకం ఫోటో తీయండి. ఫారమ్‌రెడీ ఖాళీ తెల్లటి బోర్డర్లను తొలగించి, నీడలను పోగొట్టి 10-20 KBకి మారుస్తుంది.',
     sig_auto_trim_title: 'సంతకం చుట్టూ ఖాళీ కాగితం తొలగించండి',
     sig_auto_trim_desc: 'సిరా గీతలను గుర్తించి చుట్టూ ఉన్న అనవసర ఖాళీ స్థలాన్ని ఆటోమేటిక్‌గా కట్ చేస్తుంది.',
     sig_contrast_title: 'స్పష్టత పెంచి తెల్లటి బ్యాక్‌గ్రౌండ్ ఇవ్వండి',
@@ -431,11 +462,14 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     faq_title: 'తరచుగా అడిగే ప్రశ్నలు (FAQ)',
     faq_subtitle: 'మీ దరఖాస్తు ఫైళ్లను సరిగ్గా సిద్ధం చేసుకోవడానికి సమాచారం.',
     faq1_q: 'సర్వర్ లేకుండా ఫారమ్‌రెడీ ఫైళ్లను ఎలా ప్రాసెస్ చేస్తుంది?',
-    faq1_a: 'ఫారమ్‌రెడీ మీ వెబ్ బ్రౌజర్‌లోని HTML5 Canvas మరియు WebAssembly సాంకేతికతను ఉపయోగిస్తుంది. ప్రాసెసింగ్ అంతా మీ ఫోన్ లేదా కంప్యూటర్‌లోనే జరుగుతుంది. ఏ ఫైల్ కూడా ఇంటర్నెట్‌లోకి వెళ్లదు.',
+    faq1_a:
+      'ఫారమ్‌రెడీ మీ వెబ్ బ్రౌజర్‌లోని HTML5 Canvas మరియు WebAssembly సాంకేతికతను ఉపయోగిస్తుంది. ప్రాసెసింగ్ అంతా మీ ఫోన్ లేదా కంప్యూటర్‌లోనే జరుగుతుంది. ఏ ఫైల్ కూడా ఇంటర్నెట్‌లోకి వెళ్లదు.',
     faq2_q: 'నా ఫోటో సరిగ్గానే ఉన్నా పోర్టల్ ఎందుకు తిరస్కరించింది?',
-    faq2_a: 'ఆన్‌లైన్ పోర్టల్స్ కంప్యూటర్ ద్వారా ఖచ్చితమైన సైజ్ చెక్ చేస్తాయి. 50 KB పరిమితి ఉన్నప్పుడు 50.1 KB ఉన్నా, లేదా PNG ఫార్మాట్‌లో ఉన్నా అవి రిజెక్ట్ చేస్తాయి.',
+    faq2_a:
+      'ఆన్‌లైన్ పోర్టల్స్ కంప్యూటర్ ద్వారా ఖచ్చితమైన సైజ్ చెక్ చేస్తాయి. 50 KB పరిమితి ఉన్నప్పుడు 50.1 KB ఉన్నా, లేదా PNG ఫార్మాట్‌లో ఉన్నా అవి రిజెక్ట్ చేస్తాయి.',
     faq3_q: 'ఫోన్‌తో తీసిన సంతకం ఫోటోను ఇది బాగు చేయగలదా?',
-    faq3_a: 'తప్పకుండా! మా సిగ్నేచర్ ఫిక్సర్ టూల్ కాగితంపై పడే నీడలను తొలగించి, అనవసర ఖాళీని కట్ చేసి సంతకాన్ని చాలా స్పష్టంగా మారుస్తుంది.',
+    faq3_a:
+      'తప్పకుండా! మా సిగ్నేచర్ ఫిక్సర్ టూల్ కాగితంపై పడే నీడలను తొలగించి, అనవసర ఖాళీని కట్ చేసి సంతకాన్ని చాలా స్పష్టంగా మారుస్తుంది.',
     faq4_q: 'ఇంటర్నెట్ లేకపోయినా ఇది పనిచేస్తుందా?',
     faq4_a: 'అవును. వెబ్‌సైట్ ఒక్కసారి ఓపెన్ అయిన తర్వాత మీరు ఇంటర్నెట్ ఆఫ్ చేసినా కూడా ఫోటోలు, సంతకాలు మార్చుకోవచ్చు.',
     faq5_q: 'ఫారమ్‌రెడీ నా వ్యక్తిగత వివరాలను లేదా ఫోటోలను సేవ్ చేస్తుందా?',

@@ -12,7 +12,7 @@ import {
 export function calculateTargetDimensions(
   origWidth: number,
   origHeight: number,
-  spec?: DimensionSpec
+  spec?: DimensionSpec,
 ): { width: number; height: number; scaleFactor: number } {
   if (!spec) {
     return { width: origWidth, height: origHeight, scaleFactor: 1.0 };
@@ -110,7 +110,7 @@ export async function loadImageElement(fileOrBlob: Blob): Promise<HTMLImageEleme
 export async function canvasToBlob(
   canvas: HTMLCanvasElement,
   format: ImageFormat,
-  quality: number
+  quality: number,
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
@@ -122,7 +122,7 @@ export async function canvasToBlob(
         }
       },
       format,
-      quality
+      quality,
     );
   });
 }
@@ -138,7 +138,7 @@ export async function canvasToBlob(
  */
 export async function compressImageToTarget(
   source: HTMLCanvasElement | HTMLImageElement,
-  options: CompressionOptions = {}
+  options: CompressionOptions = {},
 ): Promise<CompressionResult> {
   const {
     targetMaxBytes,
@@ -308,7 +308,7 @@ export function validateOutput(
     width?: number;
     height?: number;
     expectedFormat?: ImageFormat;
-  }
+  },
 ): ValidationReport {
   const items: ValidationReport['items'] = [];
   let isValid = true;

@@ -50,7 +50,7 @@ export interface ValidationReport {
   items: ValidationItem[];
 }
 
-export type PresetCategory = 
+export type PresetCategory =
   | 'govt-exam'
   | 'college-admission'
   | 'scholarship'

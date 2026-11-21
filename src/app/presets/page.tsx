@@ -54,7 +54,8 @@ export default function PresetsPage() {
           Application Presets Directory
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-          Verified file dimensions, file size ceilings, and format specifications for major competitive exams, admissions, and government portals.
+          Verified file dimensions, file size ceilings, and format specifications for major
+          competitive exams, admissions, and government portals.
         </p>
       </div>
 
@@ -165,9 +166,7 @@ export default function PresetsPage() {
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {preset.description}
-                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{preset.description}</p>
 
                 <div className="flex flex-wrap items-center gap-1.5 text-[11px] pt-1">
                   {preset.width && preset.height && (

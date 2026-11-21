@@ -32,7 +32,10 @@ export function Footer() {
             Form<span className="text-sky-600 dark:text-sky-400">Ready</span>
           </div>
           <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
-            {t('footer_desc', 'The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.')}
+            {t(
+              'footer_desc',
+              'The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.',
+            )}
           </p>
           <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
             <ShieldCheck className="w-4 h-4" />
@@ -45,7 +48,11 @@ export function Footer() {
               title="Clears saved preferences from browser storage"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              <span>{clearedMsg ? 'Local storage cleared!' : t('clear_local_data', 'Clear local data & preferences')}</span>
+              <span>
+                {clearedMsg
+                  ? 'Local storage cleared!'
+                  : t('clear_local_data', 'Clear local data & preferences')}
+              </span>
             </button>
           </div>
         </div>
@@ -56,12 +63,51 @@ export function Footer() {
             Compress Images
           </h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/compress-image" className="hover:text-sky-600 dark:hover:text-sky-400">Target Size Compressor</Link></li>
-            <li><Link href="/compress-image-to-20kb" className="hover:text-sky-600 dark:hover:text-sky-400">Compress to 20 KB</Link></li>
-            <li><Link href="/compress-image-to-50kb" className="hover:text-sky-600 dark:hover:text-sky-400">Compress to 50 KB</Link></li>
-            <li><Link href="/compress-image-to-100kb" className="hover:text-sky-600 dark:hover:text-sky-400">Compress to 100 KB</Link></li>
-            <li><Link href="/compress-image-to-200kb" className="hover:text-sky-600 dark:hover:text-sky-400">Compress to 200 KB</Link></li>
-            <li><Link href="/compress-image-to-500kb" className="hover:text-sky-600 dark:hover:text-sky-400">Compress to 500 KB</Link></li>
+            <li>
+              <Link href="/compress-image" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Target Size Compressor
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/compress-image-to-20kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Compress to 20 KB
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/compress-image-to-50kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Compress to 50 KB
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/compress-image-to-100kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Compress to 100 KB
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/compress-image-to-200kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Compress to 200 KB
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/compress-image-to-500kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Compress to 500 KB
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -71,11 +117,34 @@ export function Footer() {
             Photo & Signature
           </h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/resize-signature" className="hover:text-sky-600 dark:hover:text-sky-400">Signature Auto-Trim</Link></li>
-            <li><Link href="/signature-to-20kb" className="hover:text-sky-600 dark:hover:text-sky-400">Signature to 20 KB</Link></li>
-            <li><Link href="/resize-photo" className="hover:text-sky-600 dark:hover:text-sky-400">Passport Photo Resizer</Link></li>
-            <li><Link href="/resize-image" className="hover:text-sky-600 dark:hover:text-sky-400">Exact Dimension Resize</Link></li>
-            <li><Link href="/convert-image" className="hover:text-sky-600 dark:hover:text-sky-400">Format Converter (JPG/PNG)</Link></li>
+            <li>
+              <Link href="/resize-signature" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Signature Auto-Trim
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/signature-to-20kb"
+                className="hover:text-sky-600 dark:hover:text-sky-400"
+              >
+                Signature to 20 KB
+              </Link>
+            </li>
+            <li>
+              <Link href="/resize-photo" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Passport Photo Resizer
+              </Link>
+            </li>
+            <li>
+              <Link href="/resize-image" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Exact Dimension Resize
+              </Link>
+            </li>
+            <li>
+              <Link href="/convert-image" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Format Converter (JPG/PNG)
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -85,12 +154,39 @@ export function Footer() {
             PDF Suite & Legal
           </h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/jpg-to-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">Images to PDF</Link></li>
-            <li><Link href="/merge-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">Merge PDF Files</Link></li>
-            <li><Link href="/split-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">Split & Reorder PDF</Link></li>
-            <li><Link href="/compress-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">Compress PDF</Link></li>
-            <li><Link href="/privacy" className="hover:text-sky-600 dark:hover:text-sky-400 font-semibold text-slate-900 dark:text-white">Privacy Guarantee</Link></li>
-            <li><Link href="/about" className="hover:text-sky-600 dark:hover:text-sky-400">About & Architecture</Link></li>
+            <li>
+              <Link href="/jpg-to-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Images to PDF
+              </Link>
+            </li>
+            <li>
+              <Link href="/merge-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Merge PDF Files
+              </Link>
+            </li>
+            <li>
+              <Link href="/split-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Split & Reorder PDF
+              </Link>
+            </li>
+            <li>
+              <Link href="/compress-pdf" className="hover:text-sky-600 dark:hover:text-sky-400">
+                Compress PDF
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/privacy"
+                className="hover:text-sky-600 dark:hover:text-sky-400 font-semibold text-slate-900 dark:text-white"
+              >
+                Privacy Guarantee
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-sky-600 dark:hover:text-sky-400">
+                About & Architecture
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -85,7 +85,12 @@ export function PdfMergeSplitTool({ mode }: PdfMergeSplitToolProps) {
       const blob = await mergePdfFiles(mergeFiles);
       setResultBlob(blob);
       setResultUrl(URL.createObjectURL(blob));
-      confetti({ particleCount: 25, spread: 50, origin: { y: 0.8 }, disableForReducedMotion: true });
+      confetti({
+        particleCount: 25,
+        spread: 50,
+        origin: { y: 0.8 },
+        disableForReducedMotion: true,
+      });
     } catch (err: any) {
       setErrorMsg(err?.message || 'Merge failed');
     } finally {
@@ -131,7 +136,12 @@ export function PdfMergeSplitTool({ mode }: PdfMergeSplitToolProps) {
       const blob = await extractPdfPages(splitFile, indices);
       setResultBlob(blob);
       setResultUrl(URL.createObjectURL(blob));
-      confetti({ particleCount: 25, spread: 50, origin: { y: 0.8 }, disableForReducedMotion: true });
+      confetti({
+        particleCount: 25,
+        spread: 50,
+        origin: { y: 0.8 },
+        disableForReducedMotion: true,
+      });
     } catch (err: any) {
       setErrorMsg(err?.message || 'Split failed');
     } finally {
@@ -280,9 +290,12 @@ export function PdfMergeSplitTool({ mode }: PdfMergeSplitToolProps) {
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-3">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-slate-700 dark:text-slate-300">
-                      Document Page Count: <strong className="text-slate-900 dark:text-white">{totalPages} Pages</strong>
+                      Document Page Count:{' '}
+                      <strong className="text-slate-900 dark:text-white">{totalPages} Pages</strong>
                     </span>
-                    <span className="text-slate-400">Total size: {formatBytes(splitFile.size)}</span>
+                    <span className="text-slate-400">
+                      Total size: {formatBytes(splitFile.size)}
+                    </span>
                   </div>
 
                   <div>

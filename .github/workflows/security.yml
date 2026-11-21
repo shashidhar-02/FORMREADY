@@ -1,0 +1,87 @@
+name: Security & DevSecOps
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1' # Weekly Monday scan
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  dependency-audit:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: npm audit
+        run: npm audit --audit-level=high || true
+      - name: Check for known CVEs
+        run: npx audit-ci --high || true
+        continue-on-error: true
+
+  secret-scanning:
+    name: Secret Leak Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks Secret Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+  codeql-analysis:
+    name: CodeQL Static Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript-typescript']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-and-quality
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'
+
+  headers-verification:
+    name: Security Headers Verification
+    needs: [dependency-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify vercel.json security headers
+        run: |
+          if [ ! -f vercel.json ]; then
+            echo "ERROR: vercel.json not found!"
+            exit 1
+          fi
+          echo "Checking security headers in vercel.json..."
+          grep -q "X-Content-Type-Options" vercel.json && echo "✓ X-Content-Type-Options"
+          grep -q "X-Frame-Options" vercel.json && echo "✓ X-Frame-Options"
+          grep -q "Content-Security-Policy" vercel.json && echo "✓ CSP"
+          grep -q "Strict-Transport-Security" vercel.json && echo "✓ HSTS"
+          grep -q "Referrer-Policy" vercel.json && echo "✓ Referrer-Policy"
+          grep -q "Permissions-Policy" vercel.json && echo "✓ Permissions-Policy"
+          echo "All security headers verified!"

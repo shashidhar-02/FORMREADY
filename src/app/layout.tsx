@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { ServiceWorkerRegistrar } from '@/components/ServiceWorkerRegistrar';
 
 export const metadata: Metadata = {
   title: 'FormReady - Your form rejected the file? Fix it here.',
@@ -42,15 +43,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
       <head>
         <link rel="icon" href="/icon.svg" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
         {/* Zero-flash script to immediately align theme with client system */}
         <script
           dangerouslySetInnerHTML={{
@@ -73,6 +72,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
         <ThemeProvider>
           <LanguageProvider>
+            <ServiceWorkerRegistrar />
             <Header />
             <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
               {children}

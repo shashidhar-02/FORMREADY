@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Split & Extract PDF Pages Online - FormReady',
-  description: 'Extract specific pages or page ranges from a PDF document directly in your browser. Zero uploads, 100% private.',
+  description:
+    'Extract specific pages or page ranges from a PDF document directly in your browser. Zero uploads, 100% private.',
   alternates: { canonical: 'https://formready.vercel.app/split-pdf' },
 };
 
@@ -27,7 +28,8 @@ export default function SplitPdfPage() {
         commonMistakes={[
           {
             mistake: 'Entering invalid page numbers greater than the total page count.',
-            solution: 'FormReady displays the exact total page count and validates your input range.',
+            solution:
+              'FormReady displays the exact total page count and validates your input range.',
           },
         ]}
         faqs={[

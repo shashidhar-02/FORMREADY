@@ -4,7 +4,8 @@ import { SizeCompressorPage } from '@/components/SizeCompressorPage';
 
 export const metadata: Metadata = {
   title: 'Compress Image to 1 MB Online - FormReady',
-  description: 'Compress images and documents strictly under 1 MB (1024 KB) for portal attachments.',
+  description:
+    'Compress images and documents strictly under 1 MB (1024 KB) for portal attachments.',
   alternates: { canonical: 'https://formready.vercel.app/compress-image-to-1mb' },
 };
 

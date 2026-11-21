@@ -1,15 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import {
-  Download,
-  Lock,
-  Unlock,
-  RefreshCw,
-  FileCheck2,
-  Sliders,
-  CheckCircle2,
-} from 'lucide-react';
+import { Download, Lock, Unlock, RefreshCw, FileCheck2, Sliders, CheckCircle2 } from 'lucide-react';
 import { DropZone } from './DropZone';
 import { ValidationBadge } from './ValidationBadge';
 import {
@@ -141,7 +133,8 @@ export function ImageResizeTool() {
           Image Resizer for Online Forms
         </h1>
         <p className="text-base text-slate-600 dark:text-slate-400">
-          Resize image width and height to exact pixel specifications without distortion or quality loss.
+          Resize image width and height to exact pixel specifications without distortion or quality
+          loss.
         </p>
       </div>
 
@@ -286,7 +279,9 @@ export function ImageResizeTool() {
               ) : (
                 <>
                   <FileCheck2 className="w-5 h-5" />
-                  <span>Resize to {width} × {height} px</span>
+                  <span>
+                    Resize to {width} × {height} px
+                  </span>
                 </>
               )}
             </button>

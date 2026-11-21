@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Resize Photo for Online Form Submissions - FormReady',
-  description: 'Fix rejected photos for online examination, college, and job portals. Resize, align face, and compress under portal limits.',
+  description:
+    'Fix rejected photos for online examination, college, and job portals. Resize, align face, and compress under portal limits.',
   alternates: { canonical: 'https://formready.vercel.app/resize-photo-for-online-form' },
 };
 
@@ -36,12 +37,21 @@ export default function ResizePhotoForOnlineFormPage() {
         faqs={[
           {
             question: 'Will this work for SSC, UPSC, and IBPS?',
-            answer: 'Yes, presets and controls match the requirements for SSC, UPSC, IBPS, and state exams.',
+            answer:
+              'Yes, presets and controls match the requirements for SSC, UPSC, IBPS, and state exams.',
           },
         ]}
         relatedTools={[
-          { href: '/resize-signature', title: 'Signature Fixer', desc: 'Trim and clean signatures' },
-          { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'Standard 50 KB limit' },
+          {
+            href: '/resize-signature',
+            title: 'Signature Fixer',
+            desc: 'Trim and clean signatures',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress to 50 KB',
+            desc: 'Standard 50 KB limit',
+          },
         ]}
       />
     </div>

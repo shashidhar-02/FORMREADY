@@ -11,7 +11,7 @@ export interface SheetOptions {
 
 export function generatePhotoSheet(
   photoCanvas: HTMLCanvasElement,
-  options: SheetOptions
+  options: SheetOptions,
 ): HTMLCanvasElement {
   const { paperSize = '4x6', copies = 6, dpi = 300, showCutLines = true } = options;
 
@@ -45,7 +45,7 @@ export function generatePhotoSheet(
   // Desired photo tile dimension (standard 35mm x 45mm is approx 413 x 531 px at 300 DPI)
   // 2x2 inch is 600 x 600 px at 300 DPI
   const photoAspect = photoCanvas.width / photoCanvas.height;
-  
+
   const cellWidth = Math.floor(sheetWidth / cols);
   const cellHeight = Math.floor(sheetHeight / rows);
 

@@ -9,7 +9,7 @@ import { compressImageToTarget, loadImageElement } from './image-compressor';
 export async function processImageFile(
   file: File | Blob,
   options: CompressionOptions,
-  onProgress?: (stage: string) => void
+  onProgress?: (stage: string) => void,
 ): Promise<CompressionResult> {
   onProgress?.('Decoding image...');
   const img = await loadImageElement(file);

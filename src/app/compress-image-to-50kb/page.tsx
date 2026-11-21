@@ -57,9 +57,21 @@ export default function CompressImageTo50KBPage() {
           },
         ]}
         relatedTools={[
-          { href: '/resize-photo', title: 'Passport Photo Resizer', desc: 'Crop to 35x45mm or 1:1 square' },
-          { href: '/compress-image-to-20kb', title: 'Compress to 20 KB', desc: 'For signatures & thumbnails' },
-          { href: '/compress-image-to-100kb', title: 'Compress to 100 KB', desc: 'For certificates & IDs' },
+          {
+            href: '/resize-photo',
+            title: 'Passport Photo Resizer',
+            desc: 'Crop to 35x45mm or 1:1 square',
+          },
+          {
+            href: '/compress-image-to-20kb',
+            title: 'Compress to 20 KB',
+            desc: 'For signatures & thumbnails',
+          },
+          {
+            href: '/compress-image-to-100kb',
+            title: 'Compress to 100 KB',
+            desc: 'For certificates & IDs',
+          },
         ]}
       />
     </div>

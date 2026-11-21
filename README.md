@@ -66,9 +66,10 @@ The resulting static export is written to `out/`.
 
 ## 🔒 Privacy & Security Model
 
-FormReady has **zero file-processing API endpoints**. 
+FormReady has **zero file-processing API endpoints**.
 
 To verify:
+
 1. Open DevTools (`F12`) -> **Network** tab.
 2. Compress or convert any file.
 3. Observe that zero network payloads or image bytes leave your machine.

@@ -56,9 +56,21 @@ export default function CompressImagePage() {
           },
         ]}
         relatedTools={[
-          { href: '/compress-image-to-20kb', title: 'Compress to 20 KB', desc: 'Target 20 KB for signatures & thumbs' },
-          { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'Target 50 KB for application photos' },
-          { href: '/resize-photo', title: 'Passport Photo Maker', desc: 'Crop to 35x45mm or 1:1 square' },
+          {
+            href: '/compress-image-to-20kb',
+            title: 'Compress to 20 KB',
+            desc: 'Target 20 KB for signatures & thumbs',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress to 50 KB',
+            desc: 'Target 50 KB for application photos',
+          },
+          {
+            href: '/resize-photo',
+            title: 'Passport Photo Maker',
+            desc: 'Crop to 35x45mm or 1:1 square',
+          },
         ]}
       />
     </div>

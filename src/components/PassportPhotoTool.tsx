@@ -36,8 +36,12 @@ export function PassportPhotoTool({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   // Settings
-  const [aspectRatio, setAspectRatio] = useState<'3.5:4.5' | '1:1' | '3:4' | '4:5' | '2:3'>('3.5:4.5');
-  const [bgColor, setBgColor] = useState<'original' | '#FFFFFF' | '#F0F9FF' | '#F3F4F6'>('original');
+  const [aspectRatio, setAspectRatio] = useState<'3.5:4.5' | '1:1' | '3:4' | '4:5' | '2:3'>(
+    '3.5:4.5',
+  );
+  const [bgColor, setBgColor] = useState<'original' | '#FFFFFF' | '#F0F9FF' | '#F3F4F6'>(
+    'original',
+  );
   const [showFaceGuide, setShowFaceGuide] = useState(true);
   const [targetKB, setTargetKB] = useState(50);
   const [outputFormat, setOutputFormat] = useState<ImageFormat>('image/jpeg');
@@ -159,11 +163,15 @@ export function PassportPhotoTool({
       showCutLines: true,
     });
 
-    sheetCanvas.toBlob((blob) => {
-      if (blob) {
-        setSheetResultUrl(URL.createObjectURL(blob));
-      }
-    }, 'image/jpeg', 0.95);
+    sheetCanvas.toBlob(
+      (blob) => {
+        if (blob) {
+          setSheetResultUrl(URL.createObjectURL(blob));
+        }
+      },
+      'image/jpeg',
+      0.95,
+    );
   };
 
   const handleDownload = () => {
@@ -204,9 +212,7 @@ export function PassportPhotoTool({
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
           {pageHeading}
         </h1>
-        <p className="text-base text-slate-600 dark:text-slate-400">
-          {pageSubheading}
-        </p>
+        <p className="text-base text-slate-600 dark:text-slate-400">{pageSubheading}</p>
       </div>
 
       <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-8 shadow-sm space-y-6">

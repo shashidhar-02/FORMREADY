@@ -57,9 +57,21 @@ export default function CompressImageTo20KBPage() {
           },
         ]}
         relatedTools={[
-          { href: '/resize-signature', title: 'Signature Fixer', desc: 'Auto-trim white borders and boost ink contrast' },
-          { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'For passport photos' },
-          { href: '/compress-image-to-10kb', title: 'Compress to 10 KB', desc: 'For strict 10 KB thumb impressions' },
+          {
+            href: '/resize-signature',
+            title: 'Signature Fixer',
+            desc: 'Auto-trim white borders and boost ink contrast',
+          },
+          {
+            href: '/compress-image-to-50kb',
+            title: 'Compress to 50 KB',
+            desc: 'For passport photos',
+          },
+          {
+            href: '/compress-image-to-10kb',
+            title: 'Compress to 10 KB',
+            desc: 'For strict 10 KB thumb impressions',
+          },
         ]}
       />
     </div>

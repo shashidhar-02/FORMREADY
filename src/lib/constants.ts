@@ -12,12 +12,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://upsconline.nic.in/ora/instructions.php',
     verifiedAt: '2025-01-15',
     maxBytes: 307200, // 300 KB
-    minBytes: 20480,  // 20 KB
+    minBytes: 20480, // 20 KB
     width: 550,
     height: 550,
     aspectRatio: '1:1',
     format: 'JPG',
-    notes: 'Official requirement: 20 KB to 300 KB, min 350x350 to max 1000x1000 pixels. Must show 3/4 face coverage with name and date printed on photo.',
+    notes:
+      'Official requirement: 20 KB to 300 KB, min 350x350 to max 1000x1000 pixels. Must show 3/4 face coverage with name and date printed on photo.',
     country: 'India',
     targetType: 'photo',
   },
@@ -31,12 +32,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://upsconline.nic.in/ora/instructions.php',
     verifiedAt: '2025-01-15',
     maxBytes: 307200, // 300 KB
-    minBytes: 20480,  // 20 KB
+    minBytes: 20480, // 20 KB
     width: 550,
     height: 550,
     aspectRatio: '1:1',
     format: 'JPG',
-    notes: 'Official requirement: 20 KB to 300 KB. Black ink on white paper, clearly visible without shadows.',
+    notes:
+      'Official requirement: 20 KB to 300 KB. Black ink on white paper, clearly visible without shadows.',
     country: 'India',
     targetType: 'signature',
   },
@@ -57,7 +59,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     height: 190,
     aspectRatio: '3.5:4.5',
     format: 'JPG',
-    notes: 'Official requirement: 20 KB to 50 KB. Dimensions ~3.5 cm width x 4.5 cm height (approx 100x120px to 200x230px). Plain light/white background.',
+    notes:
+      'Official requirement: 20 KB to 50 KB. Dimensions ~3.5 cm width x 4.5 cm height (approx 100x120px to 200x230px). Plain light/white background.',
     country: 'India',
     targetType: 'photo',
   },
@@ -76,7 +79,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     height: 60,
     aspectRatio: '4.0:2.0',
     format: 'JPG',
-    notes: 'Official requirement: 10 KB to 20 KB. Image dimensions ~4.0 cm width x 2.0 cm height (~140x60 pixels).',
+    notes:
+      'Official requirement: 10 KB to 20 KB. Image dimensions ~4.0 cm width x 2.0 cm height (~140x60 pixels).',
     country: 'India',
     targetType: 'signature',
   },
@@ -97,7 +101,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     height: 230,
     aspectRatio: '200:230',
     format: 'JPG',
-    notes: 'Official requirement: 20 KB to 50 KB. Recommended dimensions: 200 x 230 pixels. Light/white background.',
+    notes:
+      'Official requirement: 20 KB to 50 KB. Recommended dimensions: 200 x 230 pixels. Light/white background.',
     country: 'India',
     targetType: 'photo',
   },
@@ -116,7 +121,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     height: 60,
     aspectRatio: '140:60',
     format: 'JPG',
-    notes: 'Official requirement: 10 KB to 20 KB. Dimensions 140 x 60 pixels. Running handwriting (no capital letters).',
+    notes:
+      'Official requirement: 10 KB to 20 KB. Dimensions 140 x 60 pixels. Running handwriting (no capital letters).',
     country: 'India',
     targetType: 'signature',
   },
@@ -132,12 +138,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://exams.nta.ac.in/NEET/',
     verifiedAt: '2025-02-10',
     maxBytes: 204800, // 200 KB
-    minBytes: 10240,  // 10 KB
+    minBytes: 10240, // 10 KB
     width: 400,
     height: 500,
     aspectRatio: '4:5',
     format: 'JPG',
-    notes: 'Official requirement: 10 KB to 200 KB. White background with 80% face coverage showing ears clearly.',
+    notes:
+      'Official requirement: 10 KB to 200 KB. White background with 80% face coverage showing ears clearly.',
     country: 'India',
     targetType: 'photo',
   },
@@ -151,12 +158,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://exams.nta.ac.in/NEET/',
     verifiedAt: '2025-02-10',
     maxBytes: 30720, // 30 KB
-    minBytes: 4096,  // 4 KB
+    minBytes: 4096, // 4 KB
     width: 280,
     height: 120,
     aspectRatio: '7:3',
     format: 'JPG',
-    notes: 'Official requirement: 4 KB to 30 KB. Must be clearly readable against white background.',
+    notes:
+      'Official requirement: 4 KB to 30 KB. Must be clearly readable against white background.',
     country: 'India',
     targetType: 'signature',
   },
@@ -172,12 +180,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://gate.iitk.ac.in',
     verifiedAt: '2024-09-01',
     maxBytes: 204800, // 200 KB
-    minBytes: 20480,  // 20 KB
+    minBytes: 20480, // 20 KB
     width: 480,
     height: 640,
     aspectRatio: '3.5:4.5',
     format: 'JPG',
-    notes: 'Official requirement: 20 KB to 200 KB. Minimum aspect ratio 0.66 to 0.89. White background.',
+    notes:
+      'Official requirement: 20 KB to 200 KB. Minimum aspect ratio 0.66 to 0.89. White background.',
     country: 'India',
     targetType: 'photo',
   },
@@ -191,7 +200,7 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://gate.iitk.ac.in',
     verifiedAt: '2024-09-01',
     maxBytes: 204800, // 200 KB
-    minBytes: 5120,   // 5 KB
+    minBytes: 5120, // 5 KB
     width: 320,
     height: 100,
     aspectRatio: '3.2:1',
@@ -212,12 +221,13 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     sourceUrl: 'https://www.passportindia.gov.in',
     verifiedAt: '2025-01-10',
     maxBytes: 102400, // 100 KB
-    minBytes: 10240,  // 10 KB
+    minBytes: 10240, // 10 KB
     width: 413,
     height: 531,
     aspectRatio: '3.5:4.5',
     format: 'JPG',
-    notes: 'Standard 35mm x 45mm dimension. 70-80% face view, plain light/white background, natural skin tone.',
+    notes:
+      'Standard 35mm x 45mm dimension. 70-80% face view, plain light/white background, natural skin tone.',
     country: 'India',
     targetType: 'photo',
   },
@@ -230,7 +240,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     category: 'visa-passport',
     description: 'Photo specs for US Department of State online visa application.',
     isOfficialVerified: true,
-    sourceUrl: 'https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html',
+    sourceUrl:
+      'https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html',
     verifiedAt: '2025-01-05',
     maxBytes: 245760, // 240 KB
     minBytes: 10240,
@@ -238,7 +249,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     height: 600,
     aspectRatio: '1:1',
     format: 'JPG',
-    notes: 'Official requirement: Max 240 KB. Square aspect ratio (min 600x600 px to max 1200x1200px). Off-white or white background, neutral expression.',
+    notes:
+      'Official requirement: Max 240 KB. Square aspect ratio (min 600x600 px to max 1200x1200px). Off-white or white background, neutral expression.',
     country: 'United States',
     targetType: 'photo',
   },
@@ -253,7 +265,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 10240, // 10 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions. Tested to ensure resulting blob is safely under 10.0 KB.',
+    notes:
+      "Generic preset — adjust to your portal's instructions. Tested to ensure resulting blob is safely under 10.0 KB.",
     targetType: 'document',
   },
   {
@@ -265,7 +278,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 20480, // 20 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions. Common requirement for government signatures.',
+    notes:
+      "Generic preset — adjust to your portal's instructions. Common requirement for government signatures.",
     targetType: 'signature',
   },
   {
@@ -277,7 +291,8 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 51200, // 50 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions. Extremely popular for university & job forms.',
+    notes:
+      "Generic preset — adjust to your portal's instructions. Extremely popular for university & job forms.",
     targetType: 'photo',
   },
   {
@@ -289,7 +304,7 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 102400, // 100 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions.',
+    notes: "Generic preset — adjust to your portal's instructions.",
     targetType: 'document',
   },
   {
@@ -301,7 +316,7 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 204800, // 200 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions.',
+    notes: "Generic preset — adjust to your portal's instructions.",
     targetType: 'document',
   },
   {
@@ -313,7 +328,7 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 512000, // 500 KB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions.',
+    notes: "Generic preset — adjust to your portal's instructions.",
     targetType: 'document',
   },
   {
@@ -325,23 +340,71 @@ export const PORTAL_PRESETS: PortalPreset[] = [
     isOfficialVerified: false,
     maxBytes: 1048576, // 1 MB
     format: 'JPG',
-    notes: 'Generic preset — adjust to your portal\'s instructions.',
+    notes: "Generic preset — adjust to your portal's instructions.",
     targetType: 'document',
   },
 ];
 
 export const TOOL_ROUTES = [
-  { href: '/compress-image', title: 'Compress Image', desc: 'Target exact KB size (10KB to 1MB) with zero backend.' },
-  { href: '/compress-image-to-20kb', title: 'Compress to 20 KB', desc: 'Target exact 20 KB limit for signatures & thumbnails.' },
-  { href: '/compress-image-to-50kb', title: 'Compress to 50 KB', desc: 'Target exact 50 KB limit for entrance & job photos.' },
-  { href: '/compress-image-to-100kb', title: 'Compress to 100 KB', desc: 'Target exact 100 KB limit for exam documents.' },
-  { href: '/compress-image-to-200kb', title: 'Compress to 200 KB', desc: 'Target exact 200 KB limit for certificates & IDs.' },
-  { href: '/resize-image', title: 'Resize Image', desc: 'Change dimensions, aspect ratio, or percentage scale.' },
-  { href: '/resize-photo', title: 'Passport & Photo Resizer', desc: 'Crop to 35x45mm, 1:1, 4:5 with background tint.' },
-  { href: '/resize-signature', title: 'Signature Fixer', desc: 'Auto-trim whitespace borders and enhance contrast.' },
-  { href: '/jpg-to-pdf', title: 'JPG to PDF', desc: 'Combine multiple photos & scans into a single clean PDF.' },
-  { href: '/merge-pdf', title: 'Merge PDF', desc: 'Combine multiple PDF documents in your browser.' },
-  { href: '/split-pdf', title: 'Split & Reorder PDF', desc: 'Extract, delete, rotate, or reorder PDF pages.' },
+  {
+    href: '/compress-image',
+    title: 'Compress Image',
+    desc: 'Target exact KB size (10KB to 1MB) with zero backend.',
+  },
+  {
+    href: '/compress-image-to-20kb',
+    title: 'Compress to 20 KB',
+    desc: 'Target exact 20 KB limit for signatures & thumbnails.',
+  },
+  {
+    href: '/compress-image-to-50kb',
+    title: 'Compress to 50 KB',
+    desc: 'Target exact 50 KB limit for entrance & job photos.',
+  },
+  {
+    href: '/compress-image-to-100kb',
+    title: 'Compress to 100 KB',
+    desc: 'Target exact 100 KB limit for exam documents.',
+  },
+  {
+    href: '/compress-image-to-200kb',
+    title: 'Compress to 200 KB',
+    desc: 'Target exact 200 KB limit for certificates & IDs.',
+  },
+  {
+    href: '/resize-image',
+    title: 'Resize Image',
+    desc: 'Change dimensions, aspect ratio, or percentage scale.',
+  },
+  {
+    href: '/resize-photo',
+    title: 'Passport & Photo Resizer',
+    desc: 'Crop to 35x45mm, 1:1, 4:5 with background tint.',
+  },
+  {
+    href: '/resize-signature',
+    title: 'Signature Fixer',
+    desc: 'Auto-trim whitespace borders and enhance contrast.',
+  },
+  {
+    href: '/jpg-to-pdf',
+    title: 'JPG to PDF',
+    desc: 'Combine multiple photos & scans into a single clean PDF.',
+  },
+  {
+    href: '/merge-pdf',
+    title: 'Merge PDF',
+    desc: 'Combine multiple PDF documents in your browser.',
+  },
+  {
+    href: '/split-pdf',
+    title: 'Split & Reorder PDF',
+    desc: 'Extract, delete, rotate, or reorder PDF pages.',
+  },
   { href: '/compress-pdf', title: 'Compress PDF', desc: 'Reduce PDF file size without uploading.' },
-  { href: '/convert-image', title: 'Convert Image Format', desc: 'Convert instantly between JPG, PNG, and WebP.' },
+  {
+    href: '/convert-image',
+    title: 'Convert Image Format',
+    desc: 'Convert instantly between JPG, PNG, and WebP.',
+  },
 ];

@@ -5,7 +5,8 @@ import { SeoContentSection } from '@/components/SeoContentSection';
 
 export const metadata: Metadata = {
   title: 'Convert JPG and PNG to PDF Online - FormReady',
-  description: 'Combine multiple photos, certificates, and ID documents into a single clean PDF in your browser. Reorder pages, rotate, and set margins. Zero uploads.',
+  description:
+    'Combine multiple photos, certificates, and ID documents into a single clean PDF in your browser. Reorder pages, rotate, and set margins. Zero uploads.',
   alternates: { canonical: 'https://formready.vercel.app/jpg-to-pdf' },
 };
 

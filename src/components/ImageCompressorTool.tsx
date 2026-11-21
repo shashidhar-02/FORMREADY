@@ -169,7 +169,8 @@ export function ImageCompressorTool({
       }
     } catch (err: any) {
       setErrorDetails({
-        whatHappened: err?.message || 'The browser encountered an error while processing the image.',
+        whatHappened:
+          err?.message || 'The browser encountered an error while processing the image.',
         whatToTry:
           'Ensure the file is not corrupted. If the target size is extremely small (e.g. < 5 KB), try reducing dimensions or setting a slightly higher target.',
       });
@@ -211,9 +212,7 @@ export function ImageCompressorTool({
             {pageHeading}
           </h1>
           {pageSubheading && (
-            <p className="text-base text-slate-600 dark:text-slate-400">
-              {pageSubheading}
-            </p>
+            <p className="text-base text-slate-600 dark:text-slate-400">{pageSubheading}</p>
           )}
         </div>
       )}
@@ -236,7 +235,10 @@ export function ImageCompressorTool({
               {/* Target File Size */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="target-kb" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                  <label
+                    htmlFor="target-kb"
+                    className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300"
+                  >
                     {t('target_size_label', 'Maximum File Size Target')}
                   </label>
                   <span className="font-mono text-sm font-bold text-sky-600 dark:text-sky-400">
@@ -271,7 +273,10 @@ export function ImageCompressorTool({
                   </div>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {t('target_size_note', 'Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.')}
+                  {t(
+                    'target_size_note',
+                    'Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.',
+                  )}
                 </p>
               </div>
 
@@ -297,7 +302,10 @@ export function ImageCompressorTool({
                   ))}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {t('target_format_note', 'Govt exam portals almost universally require JPG/JPEG.')}
+                  {t(
+                    'target_format_note',
+                    'Govt exam portals almost universally require JPG/JPEG.',
+                  )}
                 </p>
               </div>
             </div>
@@ -313,14 +321,21 @@ export function ImageCompressorTool({
                   <Sliders className="w-4 h-4 text-sky-500" />
                   <span>{t('exact_dims_label', 'Optional Exact Dimensions (Width × Height)')}</span>
                 </span>
-                {showAdvanced ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {showAdvanced ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
               </button>
 
               {showAdvanced && (
                 <div className="p-4 space-y-4 bg-white dark:bg-slate-900">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="custom-width" className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                      <label
+                        htmlFor="custom-width"
+                        className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1"
+                      >
                         {t('width_label', 'Width (pixels)')}
                       </label>
                       <input
@@ -333,7 +348,10 @@ export function ImageCompressorTool({
                       />
                     </div>
                     <div>
-                      <label htmlFor="custom-height" className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                      <label
+                        htmlFor="custom-height"
+                        className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1"
+                      >
                         {t('height_label', 'Height (pixels)')}
                       </label>
                       <input
@@ -377,7 +395,9 @@ export function ImageCompressorTool({
                   <p className="text-rose-600 dark:text-rose-400">{errorDetails.whatHappened}</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-rose-700 dark:text-rose-300">What you can try:</p>
+                  <p className="font-semibold text-rose-700 dark:text-rose-300">
+                    What you can try:
+                  </p>
                   <p className="text-rose-600 dark:text-rose-400">{errorDetails.whatToTry}</p>
                 </div>
               </div>
@@ -399,7 +419,9 @@ export function ImageCompressorTool({
                 ) : (
                   <>
                     <FileCheck2 className="w-5 h-5" />
-                    <span>{t('btn_compress_validate', 'Compress & Validate')} (≤ {targetKB} KB)</span>
+                    <span>
+                      {t('btn_compress_validate', 'Compress & Validate')} (≤ {targetKB} KB)
+                    </span>
                   </>
                 )}
               </button>
@@ -464,7 +486,8 @@ export function ImageCompressorTool({
                   </div>
                   {file && file.size > 0 && (
                     <span className="inline-block text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                      {t('reduced_by', 'Reduced by')} {Math.max(0, Math.round(((file.size - result.bytes) / file.size) * 100))}%
+                      {t('reduced_by', 'Reduced by')}{' '}
+                      {Math.max(0, Math.round(((file.size - result.bytes) / file.size) * 100))}%
                     </span>
                   )}
                 </div>
@@ -478,7 +501,8 @@ export function ImageCompressorTool({
                   {t('status_ready_submission', 'Ready for Portal Submission')}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Size: {formatBytes(result.bytes)} • Format: {result.format.replace('image/', '').toUpperCase()}
+                  Size: {formatBytes(result.bytes)} • Format:{' '}
+                  {result.format.replace('image/', '').toUpperCase()}
                 </p>
               </div>
 
