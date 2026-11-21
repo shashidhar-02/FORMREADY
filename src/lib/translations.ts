@@ -12,6 +12,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     nav_presets: 'Exam Presets',
     search_placeholder: 'Search tools, presets (50KB, UPSC, SSC, PDF)...',
     search_placeholder_short: 'Search tools & exam presets...',
+    search_short: 'Search tools...',
     badge_local_only: 'Processed locally',
     badge_local_desc:
       'Your files are processed in this browser using WebAssembly and Canvas. FormReady does not upload your files to any processing server.',
@@ -184,6 +185,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     nav_presets: 'परीक्षा प्रीसेट्स',
     search_placeholder: 'टूल या परीक्षा खोजें (50KB, UPSC, SSC, PDF)...',
     search_placeholder_short: 'टूल या परीक्षा खोजें...',
+    search_short: 'खोजें...',
     badge_local_only: '100% लोकल प्रोसेसिंग',
     badge_local_desc:
       'आपकी फाइलें आपके ब्राउज़र में ही प्रोसेस होती हैं। फॉर्म-रेडी आपकी फाइलें किसी भी सर्वर पर अपलोड नहीं करता है।',
@@ -342,6 +344,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     nav_presets: 'పరీక్ష నియమాలు',
     search_placeholder: 'టూల్స్ లేదా పరీక్షలు వెతకండి (50KB, UPSC, SSC, PDF)...',
     search_placeholder_short: 'టూల్స్ లేదా పరీక్షలు వెతకండి...',
+    search_short: 'వెతకండి...',
     badge_local_only: '100% మీ డివైస్‌లోనే ప్రాసెసింగ్',
     badge_local_desc: 'మీ ఫైల్స్ మీ బ్రౌజర్‌లోనే ప్రాసెస్ అవుతాయి. ఫారమ్‌రెడీ మీ ఫైళ్లను ఏ సర్వర్‌కూ అప్‌లోడ్ చేయదు.',
     theme_system: 'సిస్టమ్',

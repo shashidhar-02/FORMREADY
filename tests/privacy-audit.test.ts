@@ -21,8 +21,8 @@ function collectFiles(dir: string, exts: string[]): string[] {
 }
 
 describe('Network Privacy & Zero-Upload Audit', () => {
-  const srcDir = path.resolve(__dirname, '../src');
-  const projectRoot = path.resolve(__dirname, '..');
+  const projectRoot = process.cwd();
+  const srcDir = path.resolve(projectRoot, 'src');
 
   // ── Existing tests (unchanged) ────────────────────────────────────
 
@@ -58,7 +58,7 @@ describe('Network Privacy & Zero-Upload Audit', () => {
   });
 
   it('verifies no telemetry or tracking libraries exist in package.json', () => {
-    const pkgPath = path.resolve(__dirname, '../package.json');
+    const pkgPath = path.resolve(projectRoot, 'package.json');
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
     const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
 

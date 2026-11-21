@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShieldCheck, Moon, Sun, Laptop, Menu, X, FileCheck2 } from 'lucide-react';
+import { ShieldCheck, Moon, Sun, Laptop, Menu, X, FileCheck2, Search } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { PrivacyModal } from '@/components/PrivacyModal';
@@ -151,6 +151,28 @@ export function Header() {
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <div className="xl:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 space-y-2 animate-in slide-in-from-top duration-200">
+            {/* Quick Search Button in Mobile Menu */}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('open-global-search'));
+                }
+              }}
+              className="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-600 dark:text-slate-300 shadow-xs mb-2"
+            >
+              <div className="flex items-center gap-2">
+                <Search className="w-4 h-4 text-sky-500" />
+                <span className="font-medium">
+                  {t('search_placeholder_short', 'Search tools & exam presets...')}
+                </span>
+              </div>
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-white dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600 text-slate-400">
+                Ctrl+K
+              </kbd>
+            </button>
+
             <div className="grid grid-cols-2 gap-1 pb-2 border-b border-slate-100 dark:border-slate-800">
               {navLinks.map((link) => (
                 <Link
