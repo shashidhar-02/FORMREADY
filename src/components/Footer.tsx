@@ -32,11 +32,11 @@ export function Footer() {
             Form<span className="text-sky-600 dark:text-sky-400">Ready</span>
           </div>
           <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
-            The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.
+            {t('footer_desc', 'The browser-first file preparation utility for government examinations, college admissions, visas, and recruitment portals.')}
           </p>
           <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
             <ShieldCheck className="w-4 h-4" />
-            <span>Zero server uploads. 100% client-side execution.</span>
+            <span>{t('footer_privacy', 'Zero server uploads. 100% client-side execution.')}</span>
           </div>
           <div className="pt-1">
             <button

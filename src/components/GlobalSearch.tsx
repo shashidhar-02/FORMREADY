@@ -15,6 +15,7 @@ import {
   Command,
 } from 'lucide-react';
 import { PORTAL_PRESETS, TOOL_ROUTES } from '@/lib/constants';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SearchItem {
   id: string;
@@ -27,6 +28,7 @@ interface SearchItem {
 
 export function GlobalSearch() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -138,7 +140,7 @@ export function GlobalSearch() {
             if (!isOpen) setIsOpen(true);
           }}
           onKeyDown={handleKeyDownInInput}
-          placeholder="Search tools, presets (50KB, UPSC, SSC, PDF)..."
+          placeholder={t('search_placeholder', 'Search tools, presets (50KB, UPSC, SSC, PDF)...')}
           className="w-full bg-transparent text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
         />
 

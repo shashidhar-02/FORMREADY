@@ -3,12 +3,14 @@
 import React from 'react';
 import { CheckCircle2, AlertTriangle, XCircle } from 'lucide-react';
 import { ValidationReport } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ValidationBadgeProps {
   report: ValidationReport;
 }
 
 export function ValidationBadge({ report }: ValidationBadgeProps) {
+  const { t } = useLanguage();
   const { isValid, items } = report;
 
   return (
@@ -27,7 +29,9 @@ export function ValidationBadge({ report }: ValidationBadgeProps) {
             <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
           )}
           <span className="font-bold text-sm sm:text-base">
-            {isValid ? 'Ready for Portal Submission' : 'Verification Warning'}
+            {isValid
+              ? t('status_ready_submission', 'Ready for Portal Submission')
+              : t('status_warning', 'Verification Warning')}
           </span>
         </div>
         <span
@@ -37,7 +41,7 @@ export function ValidationBadge({ report }: ValidationBadgeProps) {
               : 'bg-amber-200/80 text-amber-800 dark:bg-amber-900 dark:text-amber-200'
           }`}
         >
-          {isValid ? '✓ Verified' : 'Check Requirements'}
+          {isValid ? t('status_verified', '✓ Verified') : t('status_warning', 'Check Requirements')}
         </span>
       </div>
 

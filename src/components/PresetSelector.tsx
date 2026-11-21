@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { PORTAL_PRESETS } from '@/lib/constants';
 import { PortalPreset, PresetCategory } from '@/types';
 import { CheckCircle2, ShieldCheck, ExternalLink, HelpCircle, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface PresetSelectorProps {
   onSelectPreset: (preset: PortalPreset) => void;
@@ -16,15 +17,16 @@ export function PresetSelector({
   selectedPresetId,
   filterType,
 }: PresetSelectorProps) {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: 'All Portals' },
-    { id: 'govt-exam', label: 'Govt Exams (UPSC/SSC)' },
-    { id: 'job-portal', label: 'Banking & Jobs' },
-    { id: 'college-admission', label: 'Entrance (NEET/JEE/GATE)' },
-    { id: 'visa-passport', label: 'Passport & Visa' },
-    { id: 'generic-size', label: 'Standard KB Limits' },
+    { id: 'all', label: t('cat_all', 'All Portals') },
+    { id: 'govt-exam', label: t('cat_govt', 'Govt Exams (UPSC/SSC)') },
+    { id: 'job-portal', label: t('cat_job', 'Banking & Jobs') },
+    { id: 'college-admission', label: t('cat_entrance', 'Entrance (NEET/JEE/GATE)') },
+    { id: 'visa-passport', label: t('cat_visa', 'Passport & Visa') },
+    { id: 'generic-size', label: t('cat_generic', 'Standard KB Limits') },
   ];
 
   const filtered = PORTAL_PRESETS.filter((p) => {
@@ -107,12 +109,12 @@ export function PresetSelector({
                 {preset.isOfficialVerified ? (
                   <span className="text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>Verified ({preset.verifiedAt})</span>
+                    <span>{t('verified_badge', 'Verified')} ({preset.verifiedAt})</span>
                   </span>
                 ) : (
                   <span className="text-slate-400 flex items-center gap-1">
                     <HelpCircle className="w-3.5 h-3.5" />
-                    <span>Generic preset</span>
+                    <span>{t('generic_badge', 'Generic preset')}</span>
                   </span>
                 )}
 
@@ -125,7 +127,7 @@ export function PresetSelector({
                     className="text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 flex items-center gap-0.5"
                     title="View official public notice"
                   >
-                    <span>Notice</span>
+                    <span>{t('official_notice', 'Notice')}</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}

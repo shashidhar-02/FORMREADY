@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   Download,
   RefreshCw,
@@ -23,6 +23,7 @@ import {
   formatBytes,
 } from '@/lib/image-compressor';
 import { CompressionResult, ImageFormat, PortalPreset, ValidationReport } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 import confetti from 'canvas-confetti';
 
 interface ImageCompressorToolProps {
@@ -42,6 +43,7 @@ export function ImageCompressorTool({
   pageSubheading,
   fixedTarget = false,
 }: ImageCompressorToolProps) {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [targetKB, setTargetKB] = useState<number>(initialTargetKB);
@@ -67,7 +69,6 @@ export function ImageCompressorTool({
   // Selected preset tracking
   const [activePreset, setActivePreset] = useState<PortalPreset | null>(null);
 
-  // Load image dimensions on file selection
   const handleFileSelect = async (files: File[]) => {
     if (!files || files.length === 0) return;
     const selected = files[0];
@@ -123,7 +124,7 @@ export function ImageCompressorTool({
     if (!file) return;
 
     setIsProcessing(true);
-    setProgressMsg('Analyzing image & optimizing size...');
+    setProgressMsg('Analyzing & optimizing...');
     setErrorDetails(null);
 
     try {
@@ -157,7 +158,7 @@ export function ImageCompressorTool({
       if (valReport.isValid) {
         try {
           confetti({
-            particleCount: 30,
+            particleCount: 35,
             spread: 60,
             origin: { y: 0.8 },
             disableForReducedMotion: true,
@@ -217,8 +218,8 @@ export function ImageCompressorTool({
         </div>
       )}
 
-      {/* Main Card */}
-      <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-8 shadow-sm space-y-6">
+      {/* Main Card with Psychological Visual Appeal */}
+      <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 rounded-3xl p-5 sm:p-8 shadow-md shadow-slate-900/5 space-y-6">
         {/* Upload Zone */}
         <DropZone
           accept="image/jpeg,image/png,image/webp"
@@ -226,11 +227,9 @@ export function ImageCompressorTool({
           selectedFile={file}
           previewUrl={previewUrl}
           onClear={handleClear}
-          title="Drop image here or choose file"
-          subtitle="Supports JPG, PNG, WebP. Analyzed & compressed strictly in your browser."
         />
 
-        {/* Compression Controls (visible when file is chosen) */}
+        {/* Compression Controls */}
         {file && (
           <div className="space-y-6 pt-4 border-t border-slate-100 dark:border-slate-800">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -238,7 +237,7 @@ export function ImageCompressorTool({
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label htmlFor="target-kb" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                    Maximum File Size Target
+                    {t('target_size_label', 'Maximum File Size Target')}
                   </label>
                   <span className="font-mono text-sm font-bold text-sky-600 dark:text-sky-400">
                     ≤ {targetKB} KB
@@ -266,20 +265,20 @@ export function ImageCompressorTool({
                       value={targetKB}
                       disabled={fixedTarget}
                       onChange={(e) => setTargetKB(Math.max(1, Number(e.target.value)))}
-                      className="w-20 px-2.5 py-1.5 text-sm font-mono font-bold rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-center"
+                      className="w-20 px-2.5 py-1.5 text-sm font-mono font-bold rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-center"
                     />
                     <span className="text-xs font-medium text-slate-500">KB</span>
                   </div>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.
+                  {t('target_size_note', 'Target safety margin: FormReady automatically aims ~3-4% below target to ensure strict portal acceptance.')}
                 </p>
               </div>
 
               {/* Target Format */}
               <div className="space-y-2">
-                <label htmlFor="format-select" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                  Output Format
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">
+                  {t('target_format_label', 'Output Format')}
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {(['image/jpeg', 'image/png', 'image/webp'] as ImageFormat[]).map((fmt) => (
@@ -289,7 +288,7 @@ export function ImageCompressorTool({
                       onClick={() => setFormat(fmt)}
                       className={`py-2 text-xs font-bold rounded-xl border transition-all ${
                         format === fmt
-                          ? 'border-sky-600 bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 shadow-sm'
+                          ? 'border-sky-600 bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 shadow-xs'
                           : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
                       }`}
                     >
@@ -298,7 +297,7 @@ export function ImageCompressorTool({
                   ))}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Govt exam portals almost universally require <strong className="text-slate-600 dark:text-slate-300">JPG/JPEG</strong>.
+                  {t('target_format_note', 'Govt exam portals almost universally require JPG/JPEG.')}
                 </p>
               </div>
             </div>
@@ -312,7 +311,7 @@ export function ImageCompressorTool({
               >
                 <span className="flex items-center gap-2">
                   <Sliders className="w-4 h-4 text-sky-500" />
-                  <span>Optional Exact Dimensions (Width × Height)</span>
+                  <span>{t('exact_dims_label', 'Optional Exact Dimensions (Width × Height)')}</span>
                 </span>
                 {showAdvanced ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </button>
@@ -322,7 +321,7 @@ export function ImageCompressorTool({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="custom-width" className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                        Width (pixels)
+                        {t('width_label', 'Width (pixels)')}
                       </label>
                       <input
                         type="number"
@@ -335,7 +334,7 @@ export function ImageCompressorTool({
                     </div>
                     <div>
                       <label htmlFor="custom-height" className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                        Height (pixels)
+                        {t('height_label', 'Height (pixels)')}
                       </label>
                       <input
                         type="number"
@@ -359,14 +358,14 @@ export function ImageCompressorTool({
                       ) : (
                         <Unlock className="w-4 h-4 text-slate-400" />
                       )}
-                      <span>Lock aspect ratio</span>
+                      <span>{t('lock_aspect_ratio', 'Lock aspect ratio')}</span>
                     </button>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Error Message Display if something went wrong */}
+            {/* Error Message Display */}
             {errorDetails && (
               <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 space-y-2 text-xs">
                 <div className="flex items-center gap-2 font-bold text-rose-800 dark:text-rose-200 text-sm">
@@ -390,7 +389,7 @@ export function ImageCompressorTool({
                 type="button"
                 onClick={handleCompress}
                 disabled={isProcessing}
-                className="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-2xl bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-bold text-sm shadow-md shadow-sky-600/20 flex items-center justify-center gap-2 transition disabled:opacity-50"
+                className="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-bold text-sm shadow-md shadow-sky-600/25 flex items-center justify-center gap-2 transition disabled:opacity-50"
               >
                 {isProcessing ? (
                   <>
@@ -400,7 +399,7 @@ export function ImageCompressorTool({
                 ) : (
                   <>
                     <FileCheck2 className="w-5 h-5" />
-                    <span>Compress & Validate (≤ {targetKB} KB)</span>
+                    <span>{t('btn_compress_validate', 'Compress & Validate')} (≤ {targetKB} KB)</span>
                   </>
                 )}
               </button>
@@ -408,9 +407,9 @@ export function ImageCompressorTool({
               <button
                 type="button"
                 onClick={handleClear}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
-                Reset
+                {t('btn_reset', 'Reset')}
               </button>
             </div>
           </div>
@@ -425,16 +424,16 @@ export function ImageCompressorTool({
             {/* Comparison Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Original */}
-              <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 text-center space-y-2">
-                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                  Original Image
+              <div className="p-4 rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 text-center space-y-2">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+                  {t('original_image', 'Original Image')}
                 </span>
                 {previewUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={previewUrl}
                     alt="Original before compression"
-                    className="max-h-48 mx-auto object-contain rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+                    className="max-h-48 mx-auto object-contain rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xs"
                   />
                 )}
                 <div className="pt-1 text-xs text-slate-600 dark:text-slate-400">
@@ -445,16 +444,16 @@ export function ImageCompressorTool({
               </div>
 
               {/* Compressed Output */}
-              <div className="p-4 rounded-2xl border-2 border-emerald-300 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-950/20 text-center space-y-2">
-                <div className="flex items-center justify-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Compressed Output</span>
+              <div className="p-4 rounded-3xl border-2 border-emerald-400 dark:border-emerald-600 bg-emerald-50/30 dark:bg-emerald-950/20 text-center space-y-2 shadow-sm">
+                <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>{t('compressed_output', 'Compressed Output')}</span>
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={result.url}
                   alt="Compressed output result"
-                  className="max-h-48 mx-auto object-contain rounded-xl border border-emerald-200 dark:border-emerald-900 bg-white dark:bg-slate-900 shadow-sm"
+                  className="max-h-48 mx-auto object-contain rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-900 shadow-sm"
                 />
                 <div className="pt-1 text-xs space-y-0.5">
                   <div className="font-mono font-bold text-slate-900 dark:text-white text-sm">
@@ -464,8 +463,8 @@ export function ImageCompressorTool({
                     Dimensions: {result.width} × {result.height} px
                   </div>
                   {file && file.size > 0 && (
-                    <span className="inline-block text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-                      Reduced by {Math.max(0, Math.round(((file.size - result.bytes) / file.size) * 100))}%
+                    <span className="inline-block text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                      {t('reduced_by', 'Reduced by')} {Math.max(0, Math.round(((file.size - result.bytes) / file.size) * 100))}%
                     </span>
                   )}
                 </div>
@@ -473,10 +472,10 @@ export function ImageCompressorTool({
             </div>
 
             {/* Direct Instant Download Area */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-sky-500/10 to-indigo-500/10 border border-emerald-200 dark:border-emerald-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-5 rounded-3xl bg-gradient-to-r from-emerald-500/15 via-sky-500/10 to-indigo-500/15 border border-emerald-300 dark:border-emerald-800 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
               <div>
-                <p className="font-bold text-slate-900 dark:text-white text-sm">
-                  Ready to submit to your application form
+                <p className="font-extrabold text-slate-900 dark:text-white text-base">
+                  {t('status_ready_submission', 'Ready for Portal Submission')}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   Size: {formatBytes(result.bytes)} • Format: {result.format.replace('image/', '').toUpperCase()}
@@ -486,10 +485,10 @@ export function ImageCompressorTool({
               <button
                 type="button"
                 onClick={handleDownload}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition"
+                className="w-full sm:w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm shadow-md shadow-emerald-600/25 flex items-center justify-center gap-2 transition"
               >
                 <Download className="w-4 h-4" />
-                <span>Download File</span>
+                <span>{t('btn_download_file', 'Download File')}</span>
               </button>
             </div>
           </div>
@@ -499,7 +498,7 @@ export function ImageCompressorTool({
       {/* Preset Chooser section below main card */}
       <div className="space-y-3 pt-4">
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-          <span>Quick Application & Exam Portals</span>
+          <span>{t('presets_title', 'Quick Application & Exam Portals')}</span>
         </h3>
         <PresetSelector
           onSelectPreset={handleApplyPreset}

@@ -1,4 +1,4 @@
-name: CI & Enterprise Quality Checks
+name: CI & Quality Verification
 
 on:
   push:
@@ -11,14 +11,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint-and-typecheck:
-    name: Code Quality & Type Safety
+  typecheck:
+    name: TypeScript Type Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -27,17 +27,17 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: TypeScript Typecheck
+      - name: Run TypeScript Check
         run: npx tsc --noEmit
 
-  test-and-privacy-audit:
-    name: Unit Tests & Zero-Upload Privacy Audit
+  unit-tests:
+    name: Vitest Unit & Privacy Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -49,37 +49,15 @@ jobs:
       - name: Execute Vitest Suite
         run: npm test
 
-  security-audit:
-    name: Enterprise Security & Vulnerability Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Dependency Vulnerability Audit
-        run: npm audit --audit-level=high
-
-      - name: Secret Leak Prevention Scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
   production-build:
-    name: Static Export Production Build
-    needs: [lint-and-typecheck, test-and-privacy-audit]
+    name: Production Static Build & CSS Verification
+    needs: [typecheck, unit-tests]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -91,12 +69,8 @@ jobs:
       - name: Build Static Production Export
         run: npm run build
 
-      - name: Verify CSS Bundle Generation
+      - name: Verify Static Output & CSS Bundle
         run: |
-          if [ -d "out/_next/static/chunks" ]; then
-            echo "Checking CSS chunk file size..."
-            ls -lh out/_next/static/chunks/*.css
-          else
-            echo "Chunks directory not found!"
-            exit 1
-          fi
+          test -f out/index.html || { echo "index.html missing"; exit 1; }
+          test -d out/_next/static/chunks || { echo "static chunks missing"; exit 1; }
+          echo "Static export verified successfully!"

@@ -21,17 +21,17 @@ import { SupportedLanguage } from '@/types';
 export function Header() {
   const pathname = usePathname();
   const { theme, setTheme, isDark } = useTheme();
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/compress-image', label: 'Compress' },
-    { href: '/resize-signature', label: 'Signature Fixer' },
-    { href: '/resize-photo', label: 'Photo & Passport' },
-    { href: '/jpg-to-pdf', label: 'Images to PDF' },
-    { href: '/merge-pdf', label: 'Merge PDF' },
-    { href: '/presets', label: 'Exam Presets' },
+    { href: '/compress-image', label: t('nav_compress', 'Compress') },
+    { href: '/resize-signature', label: t('nav_signature', 'Signature Fixer') },
+    { href: '/resize-photo', label: t('nav_photo', 'Photo & Passport') },
+    { href: '/jpg-to-pdf', label: t('nav_jpg_to_pdf', 'Images to PDF') },
+    { href: '/merge-pdf', label: t('nav_merge_pdf', 'Merge PDF') },
+    { href: '/presets', label: t('nav_presets', 'Exam Presets') },
   ];
 
   const cycleTheme = () => {
@@ -97,7 +97,7 @@ export function Header() {
               title="Click to verify browser-only privacy model"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>Processed locally</span>
+              <span>{t('badge_local_only', 'Processed locally')}</span>
             </button>
 
             {/* Language Selector */}
@@ -107,6 +107,7 @@ export function Header() {
                 id="lang-select"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value as SupportedLanguage)}
+                aria-label="Select Interface Language"
                 className="text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1.5 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition"
               >
                 <option value="en">English</option>
@@ -125,17 +126,17 @@ export function Header() {
               {theme === 'system' ? (
                 <>
                   <Laptop className="w-3.5 h-3.5 text-sky-500" />
-                  <span className="hidden sm:inline text-[11px]">System</span>
+                  <span className="hidden sm:inline text-[11px]">{t('theme_system', 'System')}</span>
                 </>
               ) : theme === 'dark' ? (
                 <>
                   <Moon className="w-3.5 h-3.5 text-sky-400" />
-                  <span className="hidden sm:inline text-[11px]">Dark</span>
+                  <span className="hidden sm:inline text-[11px]">{t('theme_dark', 'Dark')}</span>
                 </>
               ) : (
                 <>
                   <Sun className="w-3.5 h-3.5 text-amber-500" />
-                  <span className="hidden sm:inline text-[11px]">Light</span>
+                  <span className="hidden sm:inline text-[11px]">{t('theme_light', 'Light')}</span>
                 </>
               )}
             </button>
@@ -176,7 +177,7 @@ export function Header() {
                 className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>100% Processed Locally</span>
+                <span>{t('badge_local_only', '100% Processed Locally')}</span>
               </button>
 
               <select
